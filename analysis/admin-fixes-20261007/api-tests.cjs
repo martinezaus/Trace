@@ -1,9 +1,0 @@
-const fs=require('fs'),base='http://127.0.0.1:8097';const saved=JSON.parse(fs.readFileSync('analysis/admin-fixes-20261007/upload.json','utf8'));const tests=[];const unique='AUDIT '+Date.now();
-async function post(api,data){const r=await fetch(base+api,{method:'POST',body:new URLSearchParams(data)});const text=await r.text();let body;try{body=JSON.parse(text)}catch{body=text.slice(0,300)}return {status:r.status,body};}
-(async()=>{
-const payload=structuredClone(saved.orden);payload[0].numero='999991';payload[3][1].nombre='missing-fixture.pdf';tests.push({name:'rollback PDF ausente',...await post('/api/ordenes.php',{accion:'add',orden:JSON.stringify(payload)})});
-const before=await post('/api/ordenes.php',{accion:'load'});tests.push({name:'ordenes tras rollback',count:before.body.length});
-for(const data of [{accion:'add',nombre:'',sesion:'1',corte:'0'},{accion:'add',nombre:unique,sesion:'0',corte:'0'},{accion:'add',nombre:unique,sesion:'1',corte:'3'},{accion:'edit',nombre:unique,sesion:'1',corte:'0',id:'999999'},{accion:'del',id:'999999'},{accion:'reset',id:'999999'}])tests.push({name:'validaciÃ³n '+JSON.stringify(data),...await post('/api/operadores.php',data)});
-let r=await post('/api/operadores.php',{accion:'add',nombre:unique,sesion:'1',corte:'0'});tests.push({name:'alta operario',...r});const id=r.body.id;
-for(const data of [{accion:'add',nombre:unique,sesion:'1',corte:'0'},{accion:'edit',nombre:unique+' EDIT',sesion:'1',corte:'1',id},{accion:'edit',nombre:unique+' EDIT',sesion:'2',corte:'1',id},{accion:'del',id},{accion:'reset',id},{accion:'productividad'}])tests.push({name:data.accion,...await post('/api/operadores.php',data)});
-fs.writeFileSync('analysis/admin-fixes-20261007/api-tests.json',JSON.stringify(tests,null,2));console.log(JSON.stringify(tests,null,2));})().catch(e=>{console.error(e);process.exit(1)});

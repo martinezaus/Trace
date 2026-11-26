@@ -1,6 +1,0 @@
-﻿Operarios
-"Última actualización de tipologías terminadas: 2026-09-01 a 2026-10-31."
-"Consulta: 2026-10-06 17:42:35";"Registros: 1 de 1"
-"Actividad atribuida al operario principal registrado en la tipología. Incluye operarios sin actividad. La última actualización no es una fecha histórica inmutable de finalización. Productividad = (tiempo estimado - tiempo real) / tiempo estimado × 100. Positivo (+): menos tiempo y mejor rendimiento; negativo (-): más tiempo y menor rendimiento; 0 %: igual al estimado. Órdenes y operarios: promedio simple de los porcentajes de ítems terminados con ambos tiempos mayores que cero. Sin datos: no hay medición válida; se excluye del promedio. Los tiempos reales incluyen los retrabajos registrados."
-ID;Operario;Estado;"Tip. terminadas";"Tip. con tiempos válidos";"Estimado comparable";"Real comparable";"Productividad (%)"
-1;"MARTINEZ, JOSE PABLO";Activo;2;2;04:33:11;00:17:43;"'-2.914,82 %"

@@ -1,6 +1,0 @@
-﻿"Resumen por cliente"
-"Fecha de alta de las órdenes: 2026-09-01 a 2026-10-31."
-"Consulta: 2026-10-07 13:49:19";"Registros: 1 de 1"
-"Agrupa por el nombre de cliente guardado en cada orden. Variantes de escritura se muestran separadas. Los estados son los actuales. Las cantidades de lotes se suman una sola vez por orden."
-Cliente;Órdenes;Cargadas;Procesando;Terminadas;Instaladas;Tipologías;Ítems;"Estimado total"
-"NAVARRO ALFREDO";1;0;1;0;0;1;2;04:03:19

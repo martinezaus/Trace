@@ -1,6 +1,0 @@
-﻿"Pausas y suspensiones"
-"Fecha de registro del evento: 2026-09-01 a 2026-10-31."
-"Consulta: 2026-10-07 13:49:18";"Registros: 1 de 1"
-"Incluye pausas, suspensiones, reanudaciones y cierres de jornada. Una duración ausente se muestra como Sin datos. Los motivos se conservan tal como fueron registrados."
-ID;Registro;"Tipo de evento";Operario;Orden;Tarea;Motivo;"Duración registrada"
-10;"07/10/2026 16:49";"Lectura descartada (hasta 60 s)";"MARTINEZ, JOSE PABLO";14448;"MECANIZADO AUTOMATICO";"Prueba 60 segundos";00:00:00

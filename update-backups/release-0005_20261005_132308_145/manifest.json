@@ -1,0 +1,40 @@
+{
+  "version": "release-0005",
+  "release_id": "0005",
+  "release_version": "1.0.4",
+  "files": [
+    {
+      "path": "api/procesos.php",
+      "sha256": "3D06B607B19068B802FC036C6C13AA20B82E3A60F72548F915E8E913674C931B",
+      "previousSha256": "5F528E24472AE338C539B9F0F49CD608E65191B449D93943AF8F774D00A3394D"
+    },
+    {
+      "path": "include/corte_pdf_service.php",
+      "sha256": "5755C7B56117B077FCAF327445D76DCC843CE12A75AF76006B4C07F6499D87BB",
+      "previousSha256": "E8EAB8435EEF8D254831F7122FEFBCFF9C3D49BC5EC0F1AAF00E1067E2622415"
+    },
+    {
+      "path": "include/procesos_fecha.php",
+      "sha256": "0CE332EB26C70F1F863889E0BFED2B8978DF28FDDC5B9CDEF8A0F6726B20F354",
+      "previousSha256": null
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "update.ps1",
+      "sha256": "8050B174B7A22A0FA62240346279AE56C10865B462034291B1D3ACFDE7DD1569"
+    },
+    {
+      "path": "trace.bat",
+      "sha256": "2058F5422999CBD37ACA291E610DE7C5DA57937C0653FD73A41149C50D00ABB9"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "7A440B844337BB654C4AAD6818EC0D8F455B3BC1354EA9BECBCEE0F47AD77040"
+    },
+    {
+      "path": "migrations/003_process_dates.php",
+      "sha256": "93A7B89E9CE6175EA16F6B0DCFCA71A327A67D453207B0E16CD6C14B10277B73"
+    }
+  ]
+}

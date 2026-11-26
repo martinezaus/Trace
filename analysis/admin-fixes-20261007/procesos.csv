@@ -1,0 +1,7 @@
+﻿Procesos
+"Fecha de inicio del proceso: 2026-09-01 a 2026-10-31."
+"Consulta: 2026-10-07 13:49:16";"Registros: 2 de 2"
+"Una fila por proceso registrado. Tiempo registrado, no cronómetro en vivo. El ayudante se informa por separado para no duplicar la producción."
+ID;Orden;Tipología;Tarea;Operario;Ayudante;Estado;Inicio;Fin;"Tiempo registrado"
+11;14448;VC1;"MECANIZADO AUTOMATICO";"MARTINEZ, JOSE PABLO";"Sin datos";"Lectura descartada (hasta 60 s)";"07/10/2026 16:49";"Sin datos";00:00:00
+10;14448;VC1;"MECANIZADO AUTOMATICO";"MARTINEZ, JOSE PABLO";"Sin datos";"Invalidado por reversión";"07/10/2026 11:40";"Sin datos";01:00:00

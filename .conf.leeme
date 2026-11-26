@@ -1,0 +1,39 @@
+
+ Funcionamineto manteniendo xampp/wampp y docker destok, sin modificar nada para su funcionamiento en paralelo.
+
+	-> xampp  -> pto:80    -> URL: <ip/dominio>     -> Administracion
+
+	-> docker -> pto: 8080 -> <ip/dominio>/trace    -> Trace
+			  -> pto: 8081 -> <ip/dominio>:8081     -> Adminer  
+	 	
+
+	Navegador:   --------> <ip/dominio> -> me lleva al sistema actual de administracion:
+				|                   | 
+				|                   |______ dentro del sistema hay un Menu(opcion) con varias opciones, 
+				|				            Una de ella es Trace ------> sistema.ferroalum.com/trace/admin.php
+				|				
+				|     
+				|-------> <ip/dominio>/tacer/index.html
+										|
+										|------------> Sistema proceso. 
+
+SI TIENE INSTALDO [XAMPP/WAMPP]
+1. 
+Modificar < httpd.conf >, antes de realizar la accion verificá que este desconectado el servidor.
+
+Si alguna de las opciones que nombro a continuacion esta comentada con el simbolo #, eliminalo las
+    lineas deben quedar (sin # adelante):
+
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule headers_module modules/mod_headers.so
+
+
+Agregar en el < vhost > o < httpd.conf > las siguientes lineas: 
+
+   < vhost > al final del archivo
+   < httpd.conf > dentro del apartado < > o al final del archivo
+
+ProxyPreserveHost On
+ProxyPass /trace http://localhost:8080/
+ProxyPassReverse /trace http://localhost:8080/

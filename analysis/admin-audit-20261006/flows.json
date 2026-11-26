@@ -1,0 +1,73 @@
+[
+  {
+    "name": "librerias",
+    "data": {
+      "buttons": "undefined",
+      "language": "Search:"
+    }
+  },
+  {
+    "name": "editar operario",
+    "modal": true,
+    "namePresent": true,
+    "session": "1",
+    "corte": "0"
+  },
+  {
+    "name": "operario campos vacios",
+    "message": "Por favor, complete ambos campos (Nombre y Apellido)."
+  },
+  {
+    "name": "duplicado simulado",
+    "modalVisible": false,
+    "message": ""
+  },
+  {
+    "name": "JS error",
+    "error": "error is not defined"
+  },
+  {
+    "name": "JS error",
+    "error": "error is not defined"
+  },
+  {
+    "name": "activar exception",
+    "error": "page.evaluate: ReferenceError: mostrarMensajeModal is not defined\n    at activarTipologia (http://localhost:8080/trace/plugins/js/jquery.ordenes.js?v=release-0007:476:3)\n    at async <anonymous>:337:30"
+  },
+  {
+    "name": "activar mocked success",
+    "logs": [
+      [
+        "ERROR",
+        "ORDENES[ACTIVAR]",
+        "Linea 409, excepción: estado is not defined"
+      ]
+    ]
+  },
+  {
+    "name": "JS error",
+    "error": "mostrarMensajeModal is not defined"
+  },
+  {
+    "name": "revertir mocked success",
+    "logs": [
+      [
+        "ERROR",
+        "ORDENES[ACTIVAR]",
+        "Linea 409, excepción: estado is not defined"
+      ],
+      [
+        "ERROR",
+        "ORDENES",
+        "revertirTipologia excepción: ReferenceError: mostrarMensajeModal is not defined"
+      ]
+    ]
+  },
+  {
+    "name": "procesos vacios",
+    "counters": {
+      "showCount": 1,
+      "hideCount": 0
+    }
+  }
+]

@@ -1,0 +1,102 @@
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+Dependencias verificadas. Migracion prevista: . Registros: .
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]
+OK: simulacion sin cambios.
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+Dependencias verificadas. Migracion prevista: . Registros: .
+Migracion de cortes completada. Detalle en C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion\update-backups\release-0010_20261009_095143_607\cortes-migracion.json
+Actualizacion aplicada. Respaldo: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion\update-backups\release-0010_20261009_095143_607
+Log: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion\update-logs\release-0010_20261009_095143_607.log
+OK: aplicacion aislada, archivos y respaldos verificados.
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+Release 0010 ya aplicado y verificado. No se repite.
+OK: segunda aplicacion no se repite.
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\instalacion
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+ADVERTENCIA: Los archivos de destino difieren de la base del paquete: proceso_corte.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\paquete\update.ps1 : No se 
+sobrescriben versiones diferentes. Revisar el paquete contra esa instalacion.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: no sobrescribe codigo de otra version.
+Pruebas del instalador completadas con Docker simulado: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\fallo-migracion
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+Dependencias verificadas. Migracion prevista: . Registros: .
+ADVERTENCIA: Los archivos nuevos se conservan. Verifique el registro en BD antes de reintentar: la confirmacion puede 
+haberse perdido.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\paquete\update.ps1 : Docker 
+fallo (1): Fallo simulado de migracion
+ 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\fallo-migracion
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\paquete\update.ps1 : 
+Actualizacion interrumpida o en curso. Revisar soporte y respaldo: 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: fallo de migracion conserva respaldo/codigo y bloquea reintento incierto.
+TRACE release-0010 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\fallo-migracion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0010-test-0adf03e40c4a454290108a65db07ce78\paquete\update.ps1 : 
+Payload alterado: proceso_corte.php
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: paquete alterado rechazado.

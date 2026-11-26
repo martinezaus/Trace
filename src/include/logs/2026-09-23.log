@@ -1,0 +1,17 @@
+[2026-09-23 01:55:23] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo solicitado. Parámetros: {"host":"smtp.gmail.com","puerto":"587","cifrado":"tls","user":"martinez.aus@gmail.com","pass":"migc mkoq rszu cect","destinos":"jpmartinez@mendoza.gov.ar"} | Asunto: Trace Alertas
+[2026-09-23 01:55:27] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-23 12:54:31] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Respaldo iniciado /b php /var/www/html/include/backup_run.php jobId=9dfa5dfa59932b239f2e
+[2026-09-23 13:19:29] [ERROR] [MOD:BACKUPS] [IP:172.18.0.1] Error de respaldo: No se encontró el proceso de respaldo. Vuelva a iniciarlo.
+[2026-09-23 13:19:31] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Respaldo solicitado. jobId=6a3c659a1773e84bdc40
+[2026-09-23 13:19:31] [ERROR] [MOD:BACKUPS] [IP:DESCONOCIDA] mysqldump: mysqldump: Got error: 2026: "TLS/SSL error: self-signed certificate in certificate chain" when trying to connect
+
+[2026-09-23 13:19:31] [ERROR] [MOD:BACKUPS] [IP:DESCONOCIDA] Error al exportar la base de datos. Revise el registro del servidor.
+[2026-09-23 13:20:15] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Respaldo solicitado. jobId=76479df6fd4090df3725
+[2026-09-23 13:22:05] [INFO] [MOD:BACKUPS] [IP:DESCONOCIDA] Finalizado. jobId=76479df6fd4090df3725
+[2026-09-23 13:23:12] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Descarga solicitada: backup_completo_2026-09-23_13-20-15_76479df6fd4090df3725.zip
+[2026-09-23 14:19:37] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Respaldo solicitado. jobId=22a1996d65780876cc3d
+[2026-09-23 14:21:15] [INFO] [MOD:BACKUPS] [IP:DESCONOCIDA] Finalizado. jobId=22a1996d65780876cc3d
+[2026-09-23 14:21:16] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Respaldo descargado. ok
+[2026-09-23 14:21:16] [INFO] [MOD:BACKUPS] [IP:172.18.0.1] Descarga solicitada: backup_completo_2026-09-23_14-19-37_22a1996d65780876cc3d.zip
+[2026-09-23 14:21:31] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo solicitado. Parámetros: {"host":"smtp.gmail.com","puerto":"587","cifrado":"tls","user":"martinez.aus@gmail.com","pass":"migc mkoq rszu cect","destinos":"jpmartinez@mendoza.gov.ar"} | Asunto: Trace Alertas
+[2026-09-23 14:21:36] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas

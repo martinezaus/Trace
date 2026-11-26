@@ -1,0 +1,122 @@
+[
+  {
+    "path": "admin.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/admin.php\n"
+  },
+  {
+    "path": "estadisticas.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/estadisticas.php\n"
+  },
+  {
+    "path": "operarios.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/operarios.php\n"
+  },
+  {
+    "path": "api/detalles.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/detalles.php\n"
+  },
+  {
+    "path": "api/estadisticas.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/estadisticas.php\n"
+  },
+  {
+    "path": "api/operadores.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/operadores.php\n"
+  },
+  {
+    "path": "api/ordenes.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/ordenes.php\n"
+  },
+  {
+    "path": "include/detalle_admin_service.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/detalle_admin_service.php\n"
+  },
+  {
+    "path": "include/footer.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/footer.php\n"
+  },
+  {
+    "path": "include/functions.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/functions.php\n"
+  },
+  {
+    "path": "include/header.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/header.php\n"
+  },
+  {
+    "path": "include/operadores_admin.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/operadores_admin.php\n"
+  },
+  {
+    "path": "include/parse_pdf.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/parse_pdf.php\n"
+  },
+  {
+    "path": "include/reportes_service.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/reportes_service.php\n"
+  },
+  {
+    "path": "tests/admin_regression_test.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/tests/admin_regression_test.php\n"
+  },
+  {
+    "path": "plugins/js/admin_exports.js",
+    "code": 0,
+    "output": ""
+  },
+  {
+    "path": "plugins/js/jquery.grafico.js",
+    "code": 0,
+    "output": ""
+  },
+  {
+    "path": "plugins/js/jquery.operarios.js",
+    "code": 0,
+    "output": ""
+  },
+  {
+    "path": "plugins/js/jquery.ordenes.js",
+    "code": 0,
+    "output": ""
+  },
+  {
+    "path": "include/pages/admin_export.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/pages/admin_export.php\n"
+  },
+  {
+    "path": "include/pages/fileV1.0.1.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/pages/fileV1.0.1.php\n"
+  },
+  {
+    "path": "include/pages/operadorAdd.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/pages/operadorAdd.php\n"
+  },
+  {
+    "path": "include/pages/operadorEdit.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/pages/operadorEdit.php\n"
+  },
+  {
+    "path": "include/pages/upload.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/pages/upload.php\n"
+  }
+]

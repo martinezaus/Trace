@@ -1,0 +1,14 @@
+{
+  "proceso_armado.php": "ebed962689e69b6815ee4c479485b85713127d6967a43fe10f73f2f1968a8935",
+  "include/auth.php": "12e8b260b3335f657ce52fd5ca071866eae68130403b9690d62d0884b5f6d6cd",
+  "include/proceso_service.php": "ad926944f2147a78edc97124e738ae5bd6e9ad22859823348eff2503675398a2",
+  "plugins/js/jquery.lecturabarcode.js": "69e68331483099e9e66e7a7e5fe580628e245dd28b5207cc1d7d8070b1e6b550",
+  "plugins/js/jquery.procesoV1.0.3.js": "8eec69a01dfb958b88bacaeb8494215c8e41fb3badd02c021cb1dd83dd280069",
+  "plugins/js/jquery.procesopausaV1.0.3.js": "5d2c5a2f168ea818a826a3f94ffbebd57056237eedd9129a2e09744801b3ee75",
+  "plugins/js/jquery.procesosuspenderV1.0.3.js": "c15fc8a34edebf3ea067fadb67f20284f52ef2d88b33f11240ba546cf3c02951",
+  "plugins/js/jquery.documentos.js": "0d86ed80a23be594999fc560bc1c57bce786bb418e94cba9d9051a661fd43450",
+  "plugins/js/jquery.session.js": "fa5230e013ab614d7b9c7bbf771826603bcd7acf1546d6136fa096f759bfbc4e",
+  "plugins/js/jquery.functions.js": "bf8288db188de089a5b8daa1d6a13a7ae7b32df546d5a14e7911ec121d6a1a99",
+  "api/procesos.php": "86cf77acd33e0a6496a33ce352b4151f274dd1c23d6e3cdc6f670c84bea063b8",
+  "api/sesiones.php": "3155c2147118c9326b68a49a302f6d0bbb27aaf4298b31051c624225944ee50b"
+}

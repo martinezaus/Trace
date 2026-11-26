@@ -1,0 +1,165 @@
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 101.024 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 169.024 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 245.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 291.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 370.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 409.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 427.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 490.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 530.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 569.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 587.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 650.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 733.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 905.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 951.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1030.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1069.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1087.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1150.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1335.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1381.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1460.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1499.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1517.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1580.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1620.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1659.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1677.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1740.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1780.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1819.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1837.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1900.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1983.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2155.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2201.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2280.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2319.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2337.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2400.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2440.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2479.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2497.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2560.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2643.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 101.024 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 195.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 241.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 320.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 359.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 377.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 440.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 480.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 519.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 537.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 600.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 683.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 855.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 901.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 980.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1019.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1037.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1100.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1140.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1179.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1197.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1260.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1343.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1515.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1561.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1640.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1679.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1697.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1760.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 1843.608 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2015.434 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2061.896 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2140.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2179.072 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2197.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 2260.64 to int loses precision in <b>/var/www/html/include/parse_pdf.php</b> on line <b>150</b><br />
+<br />
+<b>Deprecated</b>:  Implicit conversion from float 11679.659999999998 to int loses precision in <b>/var/www/html/include/functions.php</b> on line <b>29</b><br />
+{"resultado":"OK"}

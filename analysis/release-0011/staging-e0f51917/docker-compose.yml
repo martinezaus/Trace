@@ -1,0 +1,26 @@
+name: trace-release0011-qa-e0f51917
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: trace_release0011_test
+      MYSQL_USER: qa_fixture
+      MYSQL_PASSWORD: qa_only_not_production
+    volumes:
+      - qa_db:/var/lib/mysql
+      - ./init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-u", "root"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  php:
+    image: trace-php
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  qa_db:

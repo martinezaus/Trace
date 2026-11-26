@@ -1,0 +1,343 @@
+[
+  {
+    "page": "admin",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \n\nCargar\n\nARCHIVO\n\n ver\n\nOperadores\n\n1\n\n ver\n\nTipologias\n\n40\n\n 06-10-2026\n\nCargadas\n\n2\n\nordenes\n\nTerminadas\n\n0\n\nordenes\nOrdenes\nEvolucion Ordenes Cargadas/Procesadas por mes\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [],
+    "charts": [
+      {
+        "id": "graficoOrdenes",
+        "labels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "data": [
+          {
+            "label": "Ordenes Cargadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Procesando",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Terminadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Instaladas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "id": "graficoOrdenes",
+        "labels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "data": [
+          {
+            "label": "Ordenes Cargadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Procesando",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Terminadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Instaladas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "page": "ordenes",
+    "errors": [],
+    "httpErrors": [
+      {
+        "url": "http://localhost:8080/trace/plugins/datatables/DataTables-1.10.16/images/sort_both.png",
+        "status": 404
+      },
+      {
+        "url": "http://localhost:8080/trace/plugins/datatables/DataTables-1.10.16/images/sort_desc.png",
+        "status": 404
+      }
+    ],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nOrdenes\nSearch:\n#\tPRESUPUESTO\tCLIENTE\tESTADO\tTIPOLOGIAS\tACCIONES\n6\t14448\tNAVARRO ALFREDO\tCARGADA\t\t\n4\t14680\tMILESCA ARIELA\tCARGADA\t\t\n2\t14254\tGALLO RODRIGO\tPROCESANDO\t\t\n1\t14553\tAMUCH ZAIRA\tPROCESANDO\t\t\nShowing 1 to 4 of 4 entries\nPrevious1Next\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "tabla_ordenes",
+        "rows": 4
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "operarios",
+    "errors": [],
+    "httpErrors": [
+      {
+        "url": "http://localhost:8080/trace/plugins/datatables/DataTables-1.10.16/images/sort_both.png",
+        "status": 404
+      },
+      {
+        "url": "http://localhost:8080/trace/plugins/datatables/DataTables-1.10.16/images/sort_asc.png",
+        "status": 404
+      }
+    ],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \n\n\nOperarios\n#\tAPELLIDO, NOMBRE\tESTADO\tTOKEN\tACCIONES\n1\tMARTINEZ, JOSE PABLO\tACTIVO\tO1953\t\nShowing 1 to 1 of 1 entries\nPrevious1Next\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "tabla_operarios",
+        "rows": 1
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "reportes",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nReportes de producción\nTipo de reporte\nSeleccionar tipo\nÓrdenes\nOperarios\nTipologías\nProcesos\nPausas y suspensiones\nResumen por cliente\nDesde\nHasta (inclusive)\n\nPeríodo: Fecha de alta de la orden.\n\nEstado\nTodos\nCargada\nProcesando\nTerminada\nInstalada\nCondición adicional\nSin condición\nID\nCódigo\nCliente\nEstimado orden\nReal tip. terminadas\nTipologías\nÍtems\nTip. terminadas\nTip. con tiempos válidos\nProductividad (%)\nComparación\nValor / mínimo\n\nBUSCAR DATOS LIMPIAR FILTROS\n\nEstados actuales. El tiempo real corresponde a tipologías terminadas; puede ser parcial. Productividad = (tiempo estimado - tiempo real) / tiempo estimado × 100. Positivo (+): menos tiempo y mejor rendimiento; negativo (-): más tiempo y menor rendimiento; 0 %: igual al estimado. Órdenes y operarios: promedio simple de los porcentajes de ítems terminados con ambos tiempos mayores que cero. Sin datos: no hay medición válida; se excluye del promedio. Los tiempos reales incluyen los retrabajos registrados.\n\nResultados\n\nFiltros pendientes de consultar.\n\nConfigure los filtros y busque datos.\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "resultsTable",
+        "rows": 0
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "estadisticas",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nTareas Asignadas / Terminadas\n Actualiza cada 3 minutos\nTareas p/Operarios\n Actualiza cada 3 minutos\nTareas p/Producidas-Suspendidas\n Actualiza cada 3 minutos\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [],
+    "charts": [
+      {
+        "id": "chartTareasAsigTerm",
+        "labels": [
+          "Ene",
+          "Feb",
+          "Mar",
+          "Abr",
+          "May",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dic"
+        ],
+        "data": [
+          {
+            "label": "Asignadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              43,
+              76,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Terminadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chartOperariosTareas",
+        "labels": [
+          "MARTINEZ, JOSE PABLO"
+        ],
+        "data": [
+          {
+            "label": "Tareas por operarios",
+            "data": [
+              3
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chartTareasProdSusp",
+        "labels": [
+          "Producidas",
+          "Suspendidas"
+        ],
+        "data": [
+          {
+            "data": [
+              2,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

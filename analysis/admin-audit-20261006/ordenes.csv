@@ -1,0 +1,9 @@
+﻿Órdenes
+"Fecha de alta de la orden: 2026-09-01 a 2026-10-31."
+"Consulta: 2026-10-06 17:42:32";"Registros: 4 de 4"
+"Estados actuales. El tiempo real corresponde a tipologías terminadas; puede ser parcial. Productividad = (tiempo estimado - tiempo real) / tiempo estimado × 100. Positivo (+): menos tiempo y mejor rendimiento; negativo (-): más tiempo y menor rendimiento; 0 %: igual al estimado. Órdenes y operarios: promedio simple de los porcentajes de ítems terminados con ambos tiempos mayores que cero. Sin datos: no hay medición válida; se excluye del promedio. Los tiempos reales incluyen los retrabajos registrados."
+ID;Código;Cliente;Estado;Alta;"Estimado orden";"Real tip. terminadas";Tipologías;Ítems;"Tip. terminadas";"Tip. con tiempos válidos";"Productividad (%)"
+6;14448;"NAVARRO ALFREDO";Cargada;"06/10/2026 20:40";04:03:19;"Sin datos";1;2;0;0;"Sin datos"
+4;14680;"MILESCA ARIELA";Cargada;"02/10/2026 16:54";88:36:16;"Sin datos";22;67;0;0;"Sin datos"
+2;14254;"GALLO RODRIGO";Procesando;"22/09/2026 22:00";66:13:34;00:17:05;10;21;1;1;"'-5.929,41 %"
+1;14553;"AMUCH ZAIRA";Procesando;"16/09/2026 15:58";42:06:38;00:00:38;7;21;1;1;"'+99,77 %"

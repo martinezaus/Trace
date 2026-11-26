@@ -1,0 +1,49 @@
+{
+  "version": "release-0007",
+  "release_id": "0007",
+  "release_version": "1.0.6",
+  "files": [
+    {
+      "path": "api/ordenes.php",
+      "sha256": "B72A9358B9E055F850BE62FDAB7254FC60062261AB40A9CCD3B475C8D0F70CAC",
+      "previousSha256": "BAB9FE7C020F5FF8F1756B42AE4FE5F699017F398D39694DF36F99ACB6B7CBE3"
+    },
+    {
+      "path": "include/orden_delete_service.php",
+      "sha256": "491EF8C1DA1703D74100EBD78C604BB6454B8B3A6558B595FC94C62F13356DED",
+      "previousSha256": null
+    },
+    {
+      "path": "plugins/js/jquery.ordenes.js",
+      "sha256": "98AA1091F00E88ABA4405127D117F37CEAC3E96FB0B7F9740DB2ABBE40E59989",
+      "previousSha256": "95809E372A77EA08DC270516448CEB87F2C866BA77F53B2A2E0BF221B3055C90"
+    },
+    {
+      "path": "include/footer.php",
+      "sha256": "533598C8F88DAD73DCAE310BCE35714E9378D950AACD946A6E1FC35E36DDCDBA",
+      "previousSha256": "23EBB1D490AD724FAD723F202F4DDA5950F085261E36ACB253E58CF206CB4679"
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "trace.bat",
+      "sha256": "BF7FB1FFFC03ACC7DD46AABEB35157F3A04F44D3D62AC7702ACFB1AA25ED0AA4"
+    },
+    {
+      "path": "update.ps1",
+      "sha256": "5DF7741254B4CB2CDAAD54F06BE06744B8BE612DAC555B6BB4373DA737A7BBEC"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "1301B91BC06598D31A7FCE846B16E7CAD085ED4439EDCF31116753897BCBD37F"
+    },
+    {
+      "path": "migrations/005_delete_preflight.php",
+      "sha256": "CBAF917FF7D05D11DF17F7C078602916CE3E0331598D24096DC9257CA73B3C16"
+    },
+    {
+      "path": "LEEME.md",
+      "sha256": "4B632CE9AD17ED57DB8DDB62E1172A8FB8EE917F78D3AA5477D72F95ACBF73E3"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+[2026-10-07 08:33:06] [INFO] [MOD:DEBUG] [IP:172.18.0.1] Linea 79, Contenido crudo: [{"dat":"NAVARRO ALFREDO14448(OPC2).dat","numero":"14448","cliente":"NAVARRO ALFREDO","items":"2","piezas":"38","ta":"03:14:39","tv":"00:48:40","tt":"04:03:19","corte":"00:18:25","tipologias":1,"vidrios":3},[{"codigo":"00000000","grupo_tipologia":"0","tipologia":"VC1","tiempo":11679.659999999998,"etapas":8,"descripcion":"1730, 1510, CORREDIZA GUIA DOBLE A40  de 2 hojas; Marco Perfil C8220; Hoja Perfil C8222; Lleva RUEDA REGULABLE DOBLE; Lleva RUEDA REGULABLE SIMPLE; Lleva CIERRE ROTO FRANK BIPUNTO KI 1730, 1510, TAPAJUNTAS   RA4263  solo con tapajuntas."}],[["00010001","V-DVH(VC4/VC1)",1168,3,"DVH VC4/VC1 LAMIN3 CAMA15       1  - 736 x 1299",[]],["00020001","V-DVH(VC4/VC1)",1168,3,"DVH VC4/VC1 FLOAT 5 CAMA15       1  - 736 x 1299",[]],["00030002","TELA-M(VC4/VC1)",584,3,"Tela Mosquitera VC4/VC1  - 965 x 1510",[]]],[{"nombre":"NAVARRO ALFREDO14448(OPC2)-op.pdf","descripcion":"Orden de trabajo","tipo":"1"},{"nombre":"NAVARRO ALFREDO14448(OPC2)-pla.pdf","descripcion":"Optimización perfil","tipo":"2"}]]
+[2026-10-07 08:33:06] [INFO] [MOD:ORDENES] [IP:172.18.0.1] linea 116, [Add] ID:7
+[2026-10-07 08:33:06] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 144, Documento: [NAVARRO ALFREDO14448(OPC2)-op.pdf] tipo: 1
+[2026-10-07 08:33:06] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 144, Documento: [NAVARRO ALFREDO14448(OPC2)-pla.pdf] tipo: 2
+[2026-10-07 08:33:06] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 147, Archivo encontrado. [NAVARRO ALFREDO14448(OPC2)-pla.pdf, ID: 16, ruta: ../tmp/NAVARRO ALFREDO14448(OPC2)-pla.pdf]. Se procede a cargar documentos.
+[2026-10-07 08:33:06] [INFO] [MOD:PDF] [IP:172.18.0.1] disable_functions: 
+[2026-10-07 08:33:06] [INFO] [MOD:PDF] [IP:172.18.0.1] Binario existe: SI
+[2026-10-07 08:33:06] [INFO] [MOD:PDF] [IP:172.18.0.1] Comando: Array
+(
+    [0] => /usr/bin/pdftotext
+    [1] => -bbox
+    [2] => /var/www/html/tmp/NAVARRO ALFREDO14448(OPC2)-pla.pdf
+    [3] => -
+)
+
+[2026-10-07 08:33:07] [INFO] [MOD:PDF] [IP:172.18.0.1] pdftotext -bbox código=0, salida(200)=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<doc>
+  <page err=Syntax Warning: No valid XRef size in trailer
+
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 156, Items parseados: 14
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 0 perfil C8144 barra 1/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 1 perfil C8144 barra 2/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 2 perfil C8220 barra 1/1
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 3 perfil C8222 barra 1/3
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 4 perfil C8222 barra 2/3
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 5 perfil C8222 barra 3/3
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 6 perfil C8266 barra 1/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 7 perfil C8266 barra 2/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 8 perfil CAMA15 barra 1/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 9 perfil CAMA15 barra 2/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 10 perfil RA4263 barra 1/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 11 perfil RA4263 barra 2/2
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 12 perfil C8215 barra 1/1
+[2026-10-07 08:33:07] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 13 perfil C8219 barra 1/1
+[2026-10-07 08:33:32] [ERROR] [MOD:IMPORTACION] [IP:172.18.0.1] SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 1   -- keep-cache' at line 1
+[2026-10-07 08:34:32] [INFO] [MOD:ORDENES] [IP:172.18.0.1] linea 116, [Add] ID:1
+[2026-10-07 08:34:32] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 144, Documento: [NAVARRO ALFREDO14448(OPC2)-op.pdf] tipo: 1
+[2026-10-07 08:34:32] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 144, Documento: [NAVARRO ALFREDO14448(OPC2)-pla.pdf] tipo: 2
+[2026-10-07 08:34:32] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 147, Archivo encontrado. [NAVARRO ALFREDO14448(OPC2)-pla.pdf, ID: 2, ruta: /var/www/html/api/../tmp/NAVARRO ALFREDO14448(OPC2)-pla.pdf]. Se procede a cargar documentos.
+[2026-10-07 08:34:32] [INFO] [MOD:PDF] [IP:172.18.0.1] disable_functions: 
+[2026-10-07 08:34:32] [INFO] [MOD:PDF] [IP:172.18.0.1] Binario existe: SI
+[2026-10-07 08:34:32] [INFO] [MOD:PDF] [IP:172.18.0.1] Comando: Array
+(
+    [0] => /usr/bin/pdftotext
+    [1] => -bbox
+    [2] => /var/www/html/tmp/NAVARRO ALFREDO14448(OPC2)-pla.pdf
+    [3] => -
+)
+
+[2026-10-07 08:34:33] [INFO] [MOD:PDF] [IP:172.18.0.1] pdftotext -bbox código=0, salida(200)=<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+</head>
+<body>
+<doc>
+  <page err=Syntax Warning: No valid XRef size in trailer
+
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS] [IP:172.18.0.1] linea 156, Items parseados: 14
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 0 perfil C8144 barra 1/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 1 perfil C8144 barra 2/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 2 perfil C8220 barra 1/1
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 3 perfil C8222 barra 1/3
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 4 perfil C8222 barra 2/3
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 5 perfil C8222 barra 3/3
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 6 perfil C8266 barra 1/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 7 perfil C8266 barra 2/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 8 perfil CAMA15 barra 1/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 9 perfil CAMA15 barra 2/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 10 perfil RA4263 barra 1/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 11 perfil RA4263 barra 2/2
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 12 perfil C8215 barra 1/1
+[2026-10-07 08:34:33] [INFO] [MOD:DOCUMENTOS_ITEMS] [IP:172.18.0.1] linea 178, GUARDADO. Try/catch. Item 13 perfil C8219 barra 1/1
+[2026-10-07 08:34:40] [ERROR] [MOD:IMPORTACION] [IP:172.18.0.1] La orden ya existe en el sistema.
+[2026-10-07 08:36:21] [INFO] [MOD:ORDENES] [IP:172.18.0.1] linea 116, [Add] ID:2
+[2026-10-07 08:36:21] [ERROR] [MOD:IMPORTACION] [IP:172.18.0.1] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'NAVARRO ALFREDO14448(OPC2)-op.pdf' for key 'documentos.documentos_unique'
+[2026-10-07 08:41:18] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 190, Update[status]: 2
+[2026-10-07 08:41:18] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 203, Update[ayudante]: Detalle -> ID:3
+[2026-10-07 08:43:08] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 190, Update[status]: 2
+[2026-10-07 08:43:08] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 203, Update[ayudante]: Detalle -> ID:3
+[2026-10-07 08:43:43] [INFO] [MOD:ORDENES] [IP:172.18.0.1] linea 116, [Add] ID:3
+[2026-10-07 08:43:43] [ERROR] [MOD:IMPORTACION] [IP:172.18.0.1] Archivo adjunto ausente o inválido: missing-fixture.pdf
+[2026-10-07 08:44:38] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 190, Update[status]: 2
+[2026-10-07 08:44:38] [INFO] [MOD:DETALLES] [IP:172.18.0.1] Linea 203, Update[ayudante]: Detalle -> ID:3
+[2026-10-07 13:54:37] [INFO] [MOD:ORDENES] [IP:172.18.0.1] linea 116, [Add] ID:4
+[2026-10-07 13:54:37] [ERROR] [MOD:IMPORTACION] [IP:172.18.0.1] SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'NAVARRO ALFREDO14448(OPC2)-op.pdf' for key 'documentos.documentos_unique'

@@ -1,0 +1,233 @@
+[
+  {
+    "page": "admin",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "\nWarning: session_start(): Session cannot be started after headers have already been sent in /var/www/html/include/auth.php on line 4\n\n\nTABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \n\nCargar\n\nARCHIVO\n\n ver\n\nOperadores\n\n1\n\n ver\n\nTipologias\n\n1\n\n 07-10-2026\n\nCargadas\n\n1\n\nordenes\n\nTerminadas\n\n0\n\nordenes\nOrdenes\nEvolucion Ordenes Cargadas/Procesadas por mes\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [],
+    "charts": [
+      {
+        "id": "graficoOrdenes",
+        "labels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "data": [
+          {
+            "label": "Ordenes Cargadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Procesando",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Terminadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Ordenes Instaladas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "page": "ordenes",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nOrdenes\nMostrar \n5\n10\n25\n registros\nBuscar:\n#\tPRESUPUESTO\tCLIENTE\tESTADO\tTIPOLOGIAS\tACCIONES\n1\t14448\tNAVARRO ALFREDO\tCARGADA\t\t\nMostrando 1 a 1 de 1 registros\nAnterior1Siguiente\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "tabla_ordenes",
+        "rows": 1
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "operarios",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \n\n\nOperarios\nMostrar \n5\n10\n25\n50\n registros\n#\tAPELLIDO, NOMBRE\tESTADO\tTOKEN\tACCIONES\n1\tMARTINEZ, JOSE PABLO\tACTIVO\tO1953\t\n3\tAUDIT TEST\tINACTIVO\tO4667\t\nMostrando 1 a 2 de 2 registros\nAnterior1Siguiente\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "tabla_operarios",
+        "rows": 2
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "reportes",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nReportes de producción\nTipo de reporte\nSeleccionar tipo\nÓrdenes\nOperarios\nTipologías\nProcesos\nPausas y suspensiones\nResumen por cliente\nDesde\nHasta (inclusive)\n\nPeríodo: Fecha de alta de la orden.\n\nEstado\nTodos\nCargada\nProcesando\nTerminada\nInstalada\nCondición adicional\nSin condición\nID\nCódigo\nCliente\nEstimado orden\nReal tip. terminadas\nTipologías\nÍtems\nTip. terminadas\nTip. con tiempos válidos\nProductividad (%)\nComparación\nValor / mínimo\n\nBUSCAR DATOS LIMPIAR FILTROS\n\nEstados actuales. El tiempo real corresponde a tipologías terminadas; puede ser parcial. Productividad = (tiempo estimado - tiempo real) / tiempo estimado × 100. Positivo (+): menos tiempo y mejor rendimiento; negativo (-): más tiempo y menor rendimiento; 0 %: igual al estimado. Órdenes y operarios: promedio simple de los porcentajes de ítems terminados con ambos tiempos mayores que cero. Sin datos: no hay medición válida; se excluye del promedio. Los tiempos reales incluyen los retrabajos registrados.\n\nResultados\n\nFiltros pendientes de consultar.\n\nConfigure los filtros y busque datos.\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [
+      {
+        "id": "resultsTable",
+        "rows": 0
+      }
+    ],
+    "charts": []
+  },
+  {
+    "page": "estadisticas",
+    "errors": [],
+    "httpErrors": [],
+    "failed": [],
+    "status": 200,
+    "body": "TABLERO\n\nORDENES\n\nOPERARIOS\n\nREPORTES\n\nESTADISTICAS\n\n \n\n \nTipologías creadas / terminadas\n Actualiza cada 3 minutos\nTipologías terminadas por operario\n Actualiza cada 3 minutos\nTipologías terminadas / suspendidas\n Actualiza cada 3 minutos\n© 2025, realizado por  . Términos y Condiciones",
+    "tables": [],
+    "charts": [
+      {
+        "id": "chartTareasAsigTerm",
+        "labels": [
+          "Ene",
+          "Feb",
+          "Mar",
+          "Abr",
+          "May",
+          "Jun",
+          "Jul",
+          "Ago",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dic"
+        ],
+        "data": [
+          {
+            "label": "Creadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              4,
+              0,
+              0
+            ]
+          },
+          {
+            "label": "Terminadas",
+            "data": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "id": "chartOperariosTareas",
+        "labels": [],
+        "data": [
+          {
+            "data": []
+          }
+        ]
+      },
+      {
+        "id": "chartTareasProdSusp",
+        "labels": [
+          "Terminadas",
+          "Suspendidas"
+        ],
+        "data": [
+          {
+            "data": [
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

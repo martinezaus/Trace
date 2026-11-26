@@ -1,0 +1,17 @@
+PASS Lector real inicia y muestra tarea
+PASS Relectura de orden en navegador conserva tarea
+PASS Relectura no reinicia cronómetro en navegador
+PASS Cierre válido detiene intervalo real y cuenta una tarea
+PASS Cierre menor de 60 s muestra descarte
+PASS Descarte no incrementa etapa ni deja timestamp
+PASS Armado sin errores de JavaScript
+PASS Corte abre PDF y carga ítems
+PASS Tilde guarda primero observación pendiente
+PASS Guardado fallido impide cerrar jornada
+PASS Reintento recupera cambio fallido
+PASS Último tilde detiene tarea y deshabilita cierre
+PASS PDF completado queda en consulta
+PASS Heartbeat en vuelo y último tilde se confirman sin superposición
+PASS Se ejercitaron guardados, fallo y reintento
+PASS Corte sin errores de JavaScript
+TOTAL 16 comprobaciones de navegador correctas (API simulada; JS real).

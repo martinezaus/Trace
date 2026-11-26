@@ -1,0 +1,209 @@
+[
+  {
+    "command": [
+      "node",
+      "src/tests/procesos_frontend_test.cjs"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS releer la misma tarea conserva los 90 segundos trabajados\nPASS releer la orden conserva tarea y proceso activos\nPASS releer tipología activa no borra tarea ni cronómetro\nPASS cierre válido limpia todos los identificadores y timestamps\nPASS cierre duplicado en vuelo no duplica contador\nPASS cierre frontend límite 0 ms\nPASS cierre frontend límite 59999 ms\nPASS cierre frontend límite 60000 ms\nPASS cierre frontend límite 60001 ms\nPASS cierre frontend límite 90000 ms\nPASS descarte permite escanear de nuevo sin tiempo heredado\nPASS otra orden no pisa una tarea activa\nPASS otra tarea no cambia la activa\nPASS doble alta confirma un único proceso\nPASS alta rechazada no deja nombre ni reloj huérfano\nPASS fallo de red al iniciar permite reintentar\nPASS cierre fallido conserva tarea y reloj\nPASS cierre rechazado conserva contador\nPASS reintento usa tiempo confirmado sin sumar espera de red\nPASS selección sin pendiente recupera completadas\nPASS cierre en pausa no envía finalización\nPASS selección de pausa congela tiempo una única vez\nPASS cancelar selección de pausa conserva tramo trabajado\nPASS pausa registrada excluye descanso del tiempo de tarea\nPASS error de alta de pausa permite cancelar y continuar\nPASS error al cerrar pausa conserva pausa y reloj visibles\nPASS suspensión fallida mantiene tarea activa\nPASS suspensión confirmada limpia tarea y tipología\nPASS cierre de jornada entre tareas guarda cero tiempo de tarea\nPASS cierre de jornada fallido deja trabajo activo\nPASS restaurar pendiente confirma servidor y conserva 65001 ms\nPASS última etapa completa tipología y orden tras confirmación\nPASS fallo de cierre de orden mantiene reloj y permite relectura para reintentar\nPASS fallo al cerrar tipología no vuelve a contar la tarea al reintentar\n34/34 correctas\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "/var/www/html/tests/procesos_service_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS Armado límite 0 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS Reinicio de descartada desde cero\nPASS Armado límite 59999 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS Reinicio de descartada desde cero\nPASS Armado límite 60000 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS Reinicio de descartada desde cero\nPASS Armado límite 60001 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS No reiniciar completada\nPASS Armado límite 90000 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS No reiniciar completada\nPASS Armado límite 90000000 ms\nPASS Reintento conserva resultado\nPASS Reintento no duplica evento\nPASS No reiniciar completada\nPASS Una tarea activa por tipología\nPASS No apropiarse de tarea de otro operador\nPASS Rechazar duración inválida -1\nPASS Rechazar duración inválida \"NaN\"\nPASS Rechazar duración inválida null\nPASS Rechazar duración inválida \"12.3\"\nPASS Corte nunca aplica descarte de 60 s\nPASS Fallo de evento provoca rollback\nPASS Rollback conserva tarea activa\nPASS Suspensión con fallo de evento revierte todo\nPASS Suspensión fallida conserva proceso activo\nPASS Suspensión fallida no deja pendiente huérfano\nPASS Corte inicia PDF\nPASS No abrir dos PDF activos\nPASS No tomar PDF de otro operador\nPASS Rechazar token obsoleto\nPASS Rechazar otra jornada\nPASS Heartbeat acumula 10 s\nPASS Pausa guarda tramo\nPASS No finalizar en pausa\nPASS No cerrar jornada en pausa\nPASS Pausa sin suma excluida\nPASS Reanudar repetido no duplica tiempo\nPASS Pausa con suma incluida\nPASS Exigir confirmación de parcial\nPASS Cierre parcial confirmado\nPASS Cierre repetido idempotente\nPASS PDF finalizado solo consulta\nPASS PDF ya tildado no genera tarea nueva\nPASS Desconexión no suma una hora\nPASS Jornada persiste pendiente y cierra sesión\nPASS Recuperar otra jornada conserva tiempo y rota token\nPASS Otro operador puede retomar pendiente\nPASS Orden terminada no admite corte\nPASS Documento OP no admite tarea de corte\nPASS Último tilde finaliza PDF\nPASS Heartbeat posterior no reactiva PDF finalizado\nTOTAL 61 comprobaciones correctas\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "/var/www/html/tests/procesos_mysql_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS Reproducido: ENUM original rechaza descarte\nPASS Fallo original conserva proceso abierto\nPASS Migración repetible sin cambios adicionales\nPASS MySQL estricto descarta exactamente 60 segundos\nPASS MySQL cierre repetido no duplica evento\nPASS MySQL permite reiniciar descartada\nPASS Suspender persiste proceso pendiente\nPASS Suspender bloquea tipología hasta reactivación\nPASS Suspensión repetida no duplica pendiente\nPASS Reanudar conserva milisegundos del pendiente\nPASS Reanudación consume pendiente\nPASS Trabajo acumulado supera umbral tras reanudar\nPASS Cierre entre tareas confirma jornada\nPASS Cierre entre tareas no inventa duración\nPASS Reintento de cierre no duplica pendiente\nTOTAL 15 comprobaciones MySQL correctas; tablas temporales destruidas al cerrar conexión.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "src/tests/procesos_browser_test.cjs"
+    ],
+    "exit_code": 0,
+    "stdout": "PASS Lector real inicia y muestra tarea\nPASS Relectura de orden en navegador conserva tarea\nPASS Relectura no reinicia cronómetro en navegador\nPASS Cierre válido detiene intervalo real y cuenta una tarea\nPASS Cierre menor de 60 s muestra descarte\nPASS Descarte no incrementa etapa ni deja timestamp\nPASS Armado sin errores de JavaScript\nPASS Corte abre PDF y carga ítems\nPASS Tilde guarda primero observación pendiente\nPASS Guardado fallido impide cerrar jornada\nPASS Reintento recupera cambio fallido\nPASS Último tilde detiene tarea y deshabilita cierre\nPASS PDF completado queda en consulta\nPASS Heartbeat en vuelo y último tilde se confirman sin superposición\nPASS Se ejercitaron guardados, fallo y reintento\nPASS Corte sin errores de JavaScript\nTOTAL 16 comprobaciones de navegador correctas (API simulada; JS real).\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "/var/www/html/tests/reportes_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "OK: 57 comprobaciones. Base de prueba en memoria.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "/var/www/html/tests/codigos_vidrio_pla_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "OK: ocho codigos originales, grupos, material, TELAI, limites, pedido y recorrido multipagina.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/api/procesos.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/api/procesos.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/api/sesiones.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/api/sesiones.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/include/proceso_service.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/include/proceso_service.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/include/footer.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/include/footer.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/scripts/migrar_eventos_descartados.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/scripts/migrar_eventos_descartados.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/tests/procesos_service_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/tests/procesos_service_test.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "exec",
+      "trace-php-1",
+      "php",
+      "-l",
+      "/var/www/html/tests/procesos_mysql_test.php"
+    ],
+    "exit_code": 0,
+    "stdout": "No syntax errors detected in /var/www/html/tests/procesos_mysql_test.php\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "src/plugins/js/jquery.procesoV1.0.3.js"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "src/plugins/js/jquery.procesopausaV1.0.3.js"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "src/plugins/js/jquery.procesosuspenderV1.0.3.js"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "src/plugins/js/jquery.corte_pdf.js"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "node",
+      "--check",
+      "src/plugins/js/jquery.corte_documentos.js"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

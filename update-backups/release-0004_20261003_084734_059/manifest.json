@@ -1,0 +1,31 @@
+{
+  "version": "release-0004",
+  "release_id": "0004",
+  "release_version": "1.0.3",
+  "files": [
+    {
+      "path": "plugins/js/jquery.procesoV1.0.3.js",
+      "sha256": "555E6EB584BE43782CC6CC9648E14F845649D1E23D7311AFBDCBFFC527641F30",
+      "previousSha256": "D97F2C6636D18E70FB12E08069ADB0C09CF641299E18EEB57AC63946AE6AF35F"
+    },
+    {
+      "path": "include/footer.php",
+      "sha256": "EA597DFBD094C65BF5A7754ACF163156E584178C6BF77D2C71EF7D30FE14F466",
+      "previousSha256": "FA995FC0CCA157FAD3C1B63EBBD3F3F30BBDBD3D031B104ECF70D5F4B9E61DAC"
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "update.ps1",
+      "sha256": "A753CB70EBA9945748DB8FEEDE0D53B5CB614EE2024E47D12F73A607C4F1DC24"
+    },
+    {
+      "path": "trace.bat",
+      "sha256": "11DA0A9E65E7C9334BA46265F05CD21381E7BD7DC4BA79DFD872E098E23F0DD8"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "3535BD903F5401B9F3CA04BEFF9B2FACD5A623C576CA1F1FE412D8B6125AEAE3"
+    }
+  ]
+}

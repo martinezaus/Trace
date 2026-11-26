@@ -1,0 +1,26 @@
+TRACE release-0011 - Destino: D:\desarrollos\trace\analysis\release-0011\staging-e0f51917
+Archivo: MANUAL_ADMIN.md
+Archivo: api/detalles.php
+Archivo: api/procesos.php
+Archivo: api/reportes.php
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/productividad.php
+Archivo: include/productividad_costos.php
+Archivo: include/reportes_export.php
+Archivo: include/reportes_service.php
+Archivo: scripts/migrar_productividad_costos.php
+Archivo: plugins/js/jquery.reportes.js
+Archivo: modules/soporte/dashboard.php
+Archivo: modules/soporte/productividad.php
+Archivo: modules/soporte/README.md
+Archivo: modules/soporte/api/save_productividad.php
+Archivo: modules/soporte/partials/header.php
+Archivo: modules/soporte/sql/migration_productividad.sql
+Archivo: modules/soporte/assets/js/productividad.js
+Archivo: include/pages/ordenesView.php
+Archivo: include/pages/procesosView.php
+Dependencias verificadas. Migracion prevista: Crear systemproductividad vacía, sin tarifas ni adicionales. Registros: 0.
+Migracion de productividad completada. Detalle en D:\desarrollos\trace\analysis\release-0011\staging-e0f51917\update-backups\release-0011_20261014_113531_776\productividad-migracion.json
+Actualizacion aplicada. Respaldo: D:\desarrollos\trace\analysis\release-0011\staging-e0f51917\update-backups\release-0011_20261014_113531_776
+Log: D:\desarrollos\trace\analysis\release-0011\staging-e0f51917\update-logs\release-0011_20261014_113531_776.log

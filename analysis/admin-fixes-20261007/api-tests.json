@@ -1,0 +1,117 @@
+[
+  {
+    "name": "rollback PDF ausente",
+    "status": 409,
+    "body": {
+      "resultado": "ERROR",
+      "error": "SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'NAVARRO ALFREDO14448(OPC2)-op.pdf' for key 'documentos.documentos_unique'"
+    }
+  },
+  {
+    "name": "ordenes tras rollback",
+    "count": 1
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"add\",\"nombre\":\"\",\"sesion\":\"1\",\"corte\":\"0\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "Ingrese un nombre de hasta 50 caracteres."
+    }
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"add\",\"nombre\":\"AUDIT 1791392076707\",\"sesion\":\"0\",\"corte\":\"0\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "Actualmente se admite una sesión por operario."
+    }
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"add\",\"nombre\":\"AUDIT 1791392076707\",\"sesion\":\"1\",\"corte\":\"3\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "El permiso de corte debe ser 0 o 1."
+    }
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"edit\",\"nombre\":\"AUDIT 1791392076707\",\"sesion\":\"1\",\"corte\":\"0\",\"id\":\"999999\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "El operario no existe. Actualice el listado."
+    }
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"del\",\"id\":\"999999\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "El operario no existe. Actualice el listado."
+    }
+  },
+  {
+    "name": "validaciÃ³n {\"accion\":\"reset\",\"id\":\"999999\"}",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "El operario no existe. Actualice el listado."
+    }
+  },
+  {
+    "name": "alta operario",
+    "status": 200,
+    "body": {
+      "resultado": "OK",
+      "id": 7
+    }
+  },
+  {
+    "name": "add",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "El operario ya existe con ese nombre."
+    }
+  },
+  {
+    "name": "edit",
+    "status": 200,
+    "body": {
+      "resultado": "OK",
+      "id": 7
+    }
+  },
+  {
+    "name": "edit",
+    "status": 422,
+    "body": {
+      "resultado": "ERROR",
+      "mensaje": "Actualmente se admite una sesión por operario."
+    }
+  },
+  {
+    "name": "del",
+    "status": 200,
+    "body": {
+      "resultado": "OK",
+      "id": 7
+    }
+  },
+  {
+    "name": "reset",
+    "status": 200,
+    "body": {
+      "resultado": "OK",
+      "id": 7
+    }
+  },
+  {
+    "name": "productividad",
+    "status": 200,
+    "body": {
+      "resultado": "OK"
+    }
+  }
+]

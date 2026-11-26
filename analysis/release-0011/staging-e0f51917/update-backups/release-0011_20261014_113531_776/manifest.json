@@ -1,0 +1,255 @@
+{
+  "version": "release-0011",
+  "release_id": "0011",
+  "release_version": "1.0.11",
+  "requires_release": "0010",
+  "files": [
+    {
+      "path": "MANUAL_ADMIN.md",
+      "sha256": "41FDC517092D49DA4A40E34A9FFD5A4136C5D28557064CA0F33225A77CF3532B",
+      "previousSha256": "DE7292D660D2E76FFFA92221291D6B3BB9AD8489DBDFA3BCE7307E10BA1C3F86"
+    },
+    {
+      "path": "api/detalles.php",
+      "sha256": "B22AF93ABECF17C2508CF833C8E288749CAC13772E5B1D40781DA4CEEDDE3C6F",
+      "previousSha256": "D52C6D2B1DEC121C444DD52BA65085449B2A3A7551651E444AEDECB5E6A12219"
+    },
+    {
+      "path": "api/procesos.php",
+      "sha256": "24687A90FE80F38200214B2BB6689F9F3CD62A1E8172641745C5D44A25DF6F2B",
+      "previousSha256": "86CF77ACD33E0A6496A33CE352B4151F274DD1C23D6E3CDC6F670C84BEA063B8"
+    },
+    {
+      "path": "api/reportes.php",
+      "sha256": "82322EB88CA4AFA848E41DC2EE27A8609BDAB578270CBE53731ED2BA0444D582",
+      "previousSha256": "70D23DCB48E92E67670D8B21476DFACA6AECFD92AE53170EFF9A243A362E4CAA"
+    },
+    {
+      "path": "include/detalle_admin_service.php",
+      "sha256": "4625D80A640A8706761DC2417321237C44267927E3F6B80DDF1E56DE12310677",
+      "previousSha256": "1D2077D6EB31DB77E44FA7F25302FBEA86FECC01D02EAE9F72BA6019C964BD22"
+    },
+    {
+      "path": "include/footer.php",
+      "sha256": "DFC3DA41DD6FEFEDF344D77E6AB65290DC6910C7927072425F7FB239E769E78D",
+      "previousSha256": "6DA33A3BFF0593A49E36A4BD46EACBCB8066F55C330C2CB2DCB312F0C260D33E"
+    },
+    {
+      "path": "include/productividad.php",
+      "sha256": "6E86A232C056B711C0244FD77982E4E3A3CEF2386FD5E2C68B7C2B9961EEC6E7",
+      "previousSha256": "B002A0A132205F43B5FC2A3B9AFA2094B5E5E2149B1D9D65C040DFD136550690"
+    },
+    {
+      "path": "include/productividad_costos.php",
+      "sha256": "30918803B8A572601A9D71B35952A0704BF64E2F052F39138E533B3FBEA14056",
+      "previousSha256": null
+    },
+    {
+      "path": "include/reportes_export.php",
+      "sha256": "178514CFE971CCBE5271E0B2662316F22FEBE57960313C8A4EBA1E3A6996C954",
+      "previousSha256": "5BD2A58BCB95E205E4E31E33F2BB1B29610A0B132A497CD2D4097AC593A6A284"
+    },
+    {
+      "path": "include/reportes_service.php",
+      "sha256": "81F6197A51362A57DB61D204AF62548F4828F690491E7D5CE90C9334DA6291EB",
+      "previousSha256": "EBC11FC201224512C9EE97D68320B4ECD45A6011B58DD10F6CBF931DBB4D4A45"
+    },
+    {
+      "path": "scripts/migrar_productividad_costos.php",
+      "sha256": "724BA61BECF58E5F69A7DFD1C8332BD6DDE6E0085DD3770AC956C3AC52609963",
+      "previousSha256": null
+    },
+    {
+      "path": "plugins/js/jquery.reportes.js",
+      "sha256": "303A1CEE14333A2BC7AAA84616A30386CCC75F68777AF5767699A4C1B0430A38",
+      "previousSha256": "5E8DA46692BC99ECBF3F1CC145CF399AEC84DD1A46D7731BA1EDE8D58B962B6A"
+    },
+    {
+      "path": "modules/soporte/dashboard.php",
+      "sha256": "77DF9F91DC6C64F2AB9954A15D8AE997F30DDEF07BD1E537F4CC15E6135E4B8A",
+      "previousSha256": "48317734F99EDDCD0FE1D60B2326D5B8E49144FD8FAF0023A392B68A111AC53E"
+    },
+    {
+      "path": "modules/soporte/productividad.php",
+      "sha256": "CA9A0B283B9B1D55600D10578901850FF180A9C56284AEFA86A343916AADB6CE",
+      "previousSha256": null
+    },
+    {
+      "path": "modules/soporte/README.md",
+      "sha256": "494980EB8CB526FEE45DBF9206EA48C286052FA4303C97B976184F4C7B66242A",
+      "previousSha256": "BE795D902F6FAD885B039E900A87C98A7CBF05E8B39AEB79C3FDC89CFD447966"
+    },
+    {
+      "path": "modules/soporte/api/save_productividad.php",
+      "sha256": "59766B23C4FC6D2CB4126D52EC91793948D657FCDE8CE9B8E1E531E82CB7ACC9",
+      "previousSha256": null
+    },
+    {
+      "path": "modules/soporte/partials/header.php",
+      "sha256": "0E1332A5CBD2AD224EED429A1E4C85FBDE47392339FFBD11663F09832B9BCD98",
+      "previousSha256": "D423798AB47FB174512C7BE8734BFC7E93585993FA372BAE7E139E06FBA0C39A"
+    },
+    {
+      "path": "modules/soporte/sql/migration_productividad.sql",
+      "sha256": "D639F92A40BA2E426347A489403E45D5AA2094AAFC8B07FADFD5B5A0B8A8D067",
+      "previousSha256": null
+    },
+    {
+      "path": "modules/soporte/assets/js/productividad.js",
+      "sha256": "A4757D825D64BF3C21BAE826ECE1B2AC84E638580CBD4FBE8FE70A84A64EA866",
+      "previousSha256": null
+    },
+    {
+      "path": "include/pages/ordenesView.php",
+      "sha256": "5E2B15689A3C5E588DE8CEF88A27F857645C48EF79E3A8A5CEE36A0B8E9830AF",
+      "previousSha256": "E524E5B04208C53A808D348412FD48F8A76B141991FCF609A6FD576A9F043124"
+    },
+    {
+      "path": "include/pages/procesosView.php",
+      "sha256": "2D687A105F39A74FDBF8BE3663D4EFE4A39CA08D655821EEAF31931DCB7D4D0E",
+      "previousSha256": "ED612482012B629EDA51207E26102B2B026926AA5883E522D1C9C74A844AF0C0"
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "LEEME.md",
+      "sha256": "D3CB9006C5E58B51B594290FE9D2F8A5D61E09BC7F6BF06F49ABD77E4813E04E"
+    },
+    {
+      "path": "PRUEBAS.md",
+      "sha256": "2CF39F499CB2CB76C3CEE81E2ABD3B971DA16AA61B7B19E55C0C708123EA2C82"
+    },
+    {
+      "path": "trace.bat",
+      "sha256": "E651F172E8F0D278CDB58487314D62B4E541A681D711533EBF6494404688B04D"
+    },
+    {
+      "path": "update.ps1",
+      "sha256": "A9A310A2D8F56D88207F640C89A9F060D3D32EA6BDC2D7BDEB305FD396EC0577"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "311D5FA4535A1E6ED191CDEE89BC1D5541873D6B2636F97807175EBFAF342BFF"
+    },
+    {
+      "path": "migrations/007_productividad.php",
+      "sha256": "1E61113A56ABF7461C22A89B6AC4BD43B88EA08194F6F872B879BEBE9F55CC49"
+    },
+    {
+      "path": "tests/FakeDocker.cs",
+      "sha256": "4CCBA299CE69F9AD94AB068FB48A719BBA70C0B5A4C61AB2AEB3F2626D126FC1"
+    },
+    {
+      "path": "tests/installer_test.ps1",
+      "sha256": "7A5FA891092A89B57FF0069698F8DAA4F5A6D3FF12B40FB2A55CA1D8105E6671"
+    },
+    {
+      "path": "tests/application/admin_regression_test.php",
+      "sha256": "DB6DA57F704CC6ADC38EB54B99EED9EDD8B1AE7891A8A5C751DB233FFD84C922"
+    },
+    {
+      "path": "tests/application/codigos_vidrio_pla_test.php",
+      "sha256": "8D15092D17549539E728A70BCAC8EB246FCFB7C80D7618E4D31DDCCA3A3C5455"
+    },
+    {
+      "path": "tests/application/orden_delete_frontend_test.cjs",
+      "sha256": "EB96D8C10075AEC40B5B77811BEE651C422394B26E71C159955B51F6BB76327F"
+    },
+    {
+      "path": "tests/application/orden_delete_mysql_test.php",
+      "sha256": "17A32DE96C77E03579842CC12C48C1B6AAF583CA5EF528B650E091780E608CC0"
+    },
+    {
+      "path": "tests/application/orden_delete_service_test.php",
+      "sha256": "70B14C67C32AE1B5319A8BE67A6111F64073A0F0DE5F916EB2A84E6DC411BA2C"
+    },
+    {
+      "path": "tests/application/procesos_browser_test.cjs",
+      "sha256": "78421FEF6AD1CB7A0063C9F063A04586600FDC08FBFC8F478015E532C8DD65BE"
+    },
+    {
+      "path": "tests/application/procesos_frontend_test.cjs",
+      "sha256": "5ECEF69B7BE4A39C43FB0B114E5C059E899BF0130F547E5A2112310439530298"
+    },
+    {
+      "path": "tests/application/procesos_mysql_test.php",
+      "sha256": "5447F74753F79271707EE4F51B2B005C659A37289059DBA51771ED12FEA039C1"
+    },
+    {
+      "path": "tests/application/procesos_service_test.php",
+      "sha256": "99796B71B70BDD2D474369CF1E99EC669BC7FB9BC90D0D2A7CEB95D0A4819B09"
+    },
+    {
+      "path": "tests/application/productividad_costos_browser_test.cjs",
+      "sha256": "EEF715BA7A3EE395549B31E6150B84A15A353D74A925F2371325A6547593200D"
+    },
+    {
+      "path": "tests/application/productividad_costos_test.php",
+      "sha256": "D73A3F70D1B2ED15E824A638CD85AB5B6BB455E62C8DEAFD6D47106FE47E311E"
+    },
+    {
+      "path": "tests/application/reportes_test.php",
+      "sha256": "BACE89355795998A32E2B11C7F43DEC57C5C670E69706A941AE79AD354768721"
+    },
+    {
+      "path": "tests/baseline/MANUAL_ADMIN.md",
+      "sha256": "DE7292D660D2E76FFFA92221291D6B3BB9AD8489DBDFA3BCE7307E10BA1C3F86"
+    },
+    {
+      "path": "tests/baseline/api/detalles.php",
+      "sha256": "D52C6D2B1DEC121C444DD52BA65085449B2A3A7551651E444AEDECB5E6A12219"
+    },
+    {
+      "path": "tests/baseline/api/procesos.php",
+      "sha256": "86CF77ACD33E0A6496A33CE352B4151F274DD1C23D6E3CDC6F670C84BEA063B8"
+    },
+    {
+      "path": "tests/baseline/api/reportes.php",
+      "sha256": "70D23DCB48E92E67670D8B21476DFACA6AECFD92AE53170EFF9A243A362E4CAA"
+    },
+    {
+      "path": "tests/baseline/include/detalle_admin_service.php",
+      "sha256": "1D2077D6EB31DB77E44FA7F25302FBEA86FECC01D02EAE9F72BA6019C964BD22"
+    },
+    {
+      "path": "tests/baseline/include/footer.php",
+      "sha256": "6DA33A3BFF0593A49E36A4BD46EACBCB8066F55C330C2CB2DCB312F0C260D33E"
+    },
+    {
+      "path": "tests/baseline/include/productividad.php",
+      "sha256": "B002A0A132205F43B5FC2A3B9AFA2094B5E5E2149B1D9D65C040DFD136550690"
+    },
+    {
+      "path": "tests/baseline/include/reportes_export.php",
+      "sha256": "5BD2A58BCB95E205E4E31E33F2BB1B29610A0B132A497CD2D4097AC593A6A284"
+    },
+    {
+      "path": "tests/baseline/include/reportes_service.php",
+      "sha256": "EBC11FC201224512C9EE97D68320B4ECD45A6011B58DD10F6CBF931DBB4D4A45"
+    },
+    {
+      "path": "tests/baseline/plugins/js/jquery.reportes.js",
+      "sha256": "5E8DA46692BC99ECBF3F1CC145CF399AEC84DD1A46D7731BA1EDE8D58B962B6A"
+    },
+    {
+      "path": "tests/baseline/modules/soporte/dashboard.php",
+      "sha256": "48317734F99EDDCD0FE1D60B2326D5B8E49144FD8FAF0023A392B68A111AC53E"
+    },
+    {
+      "path": "tests/baseline/modules/soporte/README.md",
+      "sha256": "BE795D902F6FAD885B039E900A87C98A7CBF05E8B39AEB79C3FDC89CFD447966"
+    },
+    {
+      "path": "tests/baseline/modules/soporte/partials/header.php",
+      "sha256": "D423798AB47FB174512C7BE8734BFC7E93585993FA372BAE7E139E06FBA0C39A"
+    },
+    {
+      "path": "tests/baseline/include/pages/ordenesView.php",
+      "sha256": "E524E5B04208C53A808D348412FD48F8A76B141991FCF609A6FD576A9F043124"
+    },
+    {
+      "path": "tests/baseline/include/pages/procesosView.php",
+      "sha256": "ED612482012B629EDA51207E26102B2B026926AA5883E522D1C9C74A844AF0C0"
+    }
+  ]
+}

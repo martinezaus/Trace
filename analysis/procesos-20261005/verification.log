@@ -1,0 +1,191 @@
+node src/tests/procesos_frontend_test.cjs
+PASS releer la misma tarea conserva los 90 segundos trabajados
+PASS releer la orden conserva tarea y proceso activos
+PASS releer tipología activa no borra tarea ni cronómetro
+PASS cierre válido limpia todos los identificadores y timestamps
+PASS cierre duplicado en vuelo no duplica contador
+PASS cierre frontend límite 0 ms
+PASS cierre frontend límite 59999 ms
+PASS cierre frontend límite 60000 ms
+PASS cierre frontend límite 60001 ms
+PASS cierre frontend límite 90000 ms
+PASS descarte permite escanear de nuevo sin tiempo heredado
+PASS otra orden no pisa una tarea activa
+PASS otra tarea no cambia la activa
+PASS doble alta confirma un único proceso
+PASS alta rechazada no deja nombre ni reloj huérfano
+PASS fallo de red al iniciar permite reintentar
+PASS cierre fallido conserva tarea y reloj
+PASS cierre rechazado conserva contador
+PASS reintento usa tiempo confirmado sin sumar espera de red
+PASS selección sin pendiente recupera completadas
+PASS cierre en pausa no envía finalización
+PASS selección de pausa congela tiempo una única vez
+PASS cancelar selección de pausa conserva tramo trabajado
+PASS pausa registrada excluye descanso del tiempo de tarea
+PASS error de alta de pausa permite cancelar y continuar
+PASS error al cerrar pausa conserva pausa y reloj visibles
+PASS suspensión fallida mantiene tarea activa
+PASS suspensión confirmada limpia tarea y tipología
+PASS cierre de jornada entre tareas guarda cero tiempo de tarea
+PASS cierre de jornada fallido deja trabajo activo
+PASS restaurar pendiente confirma servidor y conserva 65001 ms
+PASS última etapa completa tipología y orden tras confirmación
+PASS fallo de cierre de orden mantiene reloj y permite relectura para reintentar
+PASS fallo al cerrar tipología no vuelve a contar la tarea al reintentar
+34/34 correctas
+
+
+docker exec trace-php-1 php /var/www/html/tests/procesos_service_test.php
+PASS Armado límite 0 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS Reinicio de descartada desde cero
+PASS Armado límite 59999 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS Reinicio de descartada desde cero
+PASS Armado límite 60000 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS Reinicio de descartada desde cero
+PASS Armado límite 60001 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS No reiniciar completada
+PASS Armado límite 90000 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS No reiniciar completada
+PASS Armado límite 90000000 ms
+PASS Reintento conserva resultado
+PASS Reintento no duplica evento
+PASS No reiniciar completada
+PASS Una tarea activa por tipología
+PASS No apropiarse de tarea de otro operador
+PASS Rechazar duración inválida -1
+PASS Rechazar duración inválida "NaN"
+PASS Rechazar duración inválida null
+PASS Rechazar duración inválida "12.3"
+PASS Corte nunca aplica descarte de 60 s
+PASS Fallo de evento provoca rollback
+PASS Rollback conserva tarea activa
+PASS Suspensión con fallo de evento revierte todo
+PASS Suspensión fallida conserva proceso activo
+PASS Suspensión fallida no deja pendiente huérfano
+PASS Corte inicia PDF
+PASS No abrir dos PDF activos
+PASS No tomar PDF de otro operador
+PASS Rechazar token obsoleto
+PASS Rechazar otra jornada
+PASS Heartbeat acumula 10 s
+PASS Pausa guarda tramo
+PASS No finalizar en pausa
+PASS No cerrar jornada en pausa
+PASS Pausa sin suma excluida
+PASS Reanudar repetido no duplica tiempo
+PASS Pausa con suma incluida
+PASS Exigir confirmación de parcial
+PASS Cierre parcial confirmado
+PASS Cierre repetido idempotente
+PASS PDF finalizado solo consulta
+PASS PDF ya tildado no genera tarea nueva
+PASS Desconexión no suma una hora
+PASS Jornada persiste pendiente y cierra sesión
+PASS Recuperar otra jornada conserva tiempo y rota token
+PASS Otro operador puede retomar pendiente
+PASS Orden terminada no admite corte
+PASS Documento OP no admite tarea de corte
+PASS Último tilde finaliza PDF
+PASS Heartbeat posterior no reactiva PDF finalizado
+TOTAL 61 comprobaciones correctas
+
+
+docker exec trace-php-1 php /var/www/html/tests/procesos_mysql_test.php
+PASS Reproducido: ENUM original rechaza descarte
+PASS Fallo original conserva proceso abierto
+PASS Migración repetible sin cambios adicionales
+PASS MySQL estricto descarta exactamente 60 segundos
+PASS MySQL cierre repetido no duplica evento
+PASS MySQL permite reiniciar descartada
+PASS Suspender persiste proceso pendiente
+PASS Suspender bloquea tipología hasta reactivación
+PASS Suspensión repetida no duplica pendiente
+PASS Reanudar conserva milisegundos del pendiente
+PASS Reanudación consume pendiente
+PASS Trabajo acumulado supera umbral tras reanudar
+PASS Cierre entre tareas confirma jornada
+PASS Cierre entre tareas no inventa duración
+PASS Reintento de cierre no duplica pendiente
+TOTAL 15 comprobaciones MySQL correctas; tablas temporales destruidas al cerrar conexión.
+
+
+node src/tests/procesos_browser_test.cjs
+PASS Lector real inicia y muestra tarea
+PASS Relectura de orden en navegador conserva tarea
+PASS Relectura no reinicia cronómetro en navegador
+PASS Cierre válido detiene intervalo real y cuenta una tarea
+PASS Cierre menor de 60 s muestra descarte
+PASS Descarte no incrementa etapa ni deja timestamp
+PASS Armado sin errores de JavaScript
+PASS Corte abre PDF y carga ítems
+PASS Tilde guarda primero observación pendiente
+PASS Guardado fallido impide cerrar jornada
+PASS Reintento recupera cambio fallido
+PASS Último tilde detiene tarea y deshabilita cierre
+PASS PDF completado queda en consulta
+PASS Heartbeat en vuelo y último tilde se confirman sin superposición
+PASS Se ejercitaron guardados, fallo y reintento
+PASS Corte sin errores de JavaScript
+TOTAL 16 comprobaciones de navegador correctas (API simulada; JS real).
+
+
+docker exec trace-php-1 php /var/www/html/tests/reportes_test.php
+OK: 57 comprobaciones. Base de prueba en memoria.
+
+
+docker exec trace-php-1 php /var/www/html/tests/codigos_vidrio_pla_test.php
+OK: ocho codigos originales, grupos, material, TELAI, limites, pedido y recorrido multipagina.
+
+
+docker exec trace-php-1 php -l /var/www/html/api/procesos.php
+No syntax errors detected in /var/www/html/api/procesos.php
+
+
+docker exec trace-php-1 php -l /var/www/html/api/sesiones.php
+No syntax errors detected in /var/www/html/api/sesiones.php
+
+
+docker exec trace-php-1 php -l /var/www/html/include/proceso_service.php
+No syntax errors detected in /var/www/html/include/proceso_service.php
+
+
+docker exec trace-php-1 php -l /var/www/html/include/footer.php
+No syntax errors detected in /var/www/html/include/footer.php
+
+
+docker exec trace-php-1 php -l /var/www/html/scripts/migrar_eventos_descartados.php
+No syntax errors detected in /var/www/html/scripts/migrar_eventos_descartados.php
+
+
+docker exec trace-php-1 php -l /var/www/html/tests/procesos_service_test.php
+No syntax errors detected in /var/www/html/tests/procesos_service_test.php
+
+
+docker exec trace-php-1 php -l /var/www/html/tests/procesos_mysql_test.php
+No syntax errors detected in /var/www/html/tests/procesos_mysql_test.php
+
+
+node --check src/plugins/js/jquery.procesoV1.0.3.js
+
+
+node --check src/plugins/js/jquery.procesopausaV1.0.3.js
+
+
+node --check src/plugins/js/jquery.procesosuspenderV1.0.3.js
+
+
+node --check src/plugins/js/jquery.corte_pdf.js
+
+
+node --check src/plugins/js/jquery.corte_documentos.js

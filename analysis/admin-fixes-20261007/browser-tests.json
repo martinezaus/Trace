@@ -1,0 +1,23 @@
+{
+  "tests": [
+    "Una instancia del gráfico",
+    "Terminadas cuenta estado 2",
+    "Leyenda compatible con Chart 2",
+    "Pie no superpuesto",
+    "Cuatro exportaciones disponibles",
+    "Idioma español",
+    "Exportación tabla csv",
+    "Exportación tabla pdf",
+    "Reversión real y recarga del modal",
+    "Activación real y recarga",
+    "Ayudante real y mensaje",
+    "Alta de operario en navegador",
+    "Duplicado conserva formulario y muestra motivo",
+    "Edición real",
+    "Sin excepciones JS en flujos administrativos",
+    "Baja inválida informa error sin ReferenceError",
+    "Sin datos cierra indicador de carga",
+    "Error de red cierra indicador de carga"
+  ],
+  "errors": []
+}

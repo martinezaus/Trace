@@ -1,0 +1,13 @@
+TRACE release-0010 - Destino: D:\desarrollos\trace
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: proceso_corte.php
+Archivo: api/corte_pdf.php
+Archivo: api/documentos.php
+Archivo: include/corte_pdf_service.php
+Archivo: include/corte_auth.php
+Archivo: include/footer.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: scripts/corte_pdf.sql
+Dependencias verificadas. Migracion prevista: Renombrar cortepdf a cortes conservando datos. Registros: 2.
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]

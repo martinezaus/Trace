@@ -1,0 +1,13 @@
+﻿Procesos
+"Fecha de inicio del proceso: 2026-09-01 a 2026-10-31."
+"Consulta: 2026-10-06 17:42:39";"Registros: 8 de 8"
+"Una fila por proceso registrado. Tiempo registrado, no cronómetro en vivo. El ayudante se informa por separado para no duplicar la producción."
+ID;Orden;Tipología;Tarea;Operario;Ayudante;Estado;Inicio;Fin;"Tiempo registrado"
+8;14254;CORTE;"CORTE DE ALUMINIO";"MARTINEZ, JOSE PABLO";"Sin datos";Pendiente;"29/09/2026 21:05";"Sin datos";00:00:37
+9;14254;CORTE;"CORTE DE VIDRIO";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"29/09/2026 18:06";"29/09/2026 18:23";00:17:05
+7;14254;CORTE;"CORTE DE VIDRIO";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"25/09/2026 18:44";"29/09/2026 08:55";00:05:48
+6;14254;CORTE;"CORTE DE ALUMINIO";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"25/09/2026 15:39";"25/09/2026 15:41";00:01:27
+5;14553;CORTE;"CORTE DE ALUMINIO";"MARTINEZ, JOSE PABLO";"Sin datos";"En proceso";"16/09/2026 20:46";"Sin datos";"Sin datos"
+4;14553;VC2;"MECANIZADO AUTOMATICO";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"16/09/2026 17:31";"16/09/2026 17:33";00:01:12
+3;14553;PR1;"COLOCACION DE TAPAJUNTAS";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"16/09/2026 17:25";"16/09/2026 17:25";00:00:15
+2;14553;PR1;"MECANIZADO AUTOMATICO";"MARTINEZ, JOSE PABLO";"Sin datos";Finalizado;"16/09/2026 17:24";"16/09/2026 17:25";00:00:23

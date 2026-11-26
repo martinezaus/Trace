@@ -1,0 +1,5 @@
+[2026-11-16 19:35:49] [INFO] [MOD:LOGIN] [IP:172.18.0.1] [O1953] Seleccionó sector: Armado.
+[2026-11-16 19:35:50] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo solicitado. Parámetros: {"host":"smtp.gmail.com","puerto":"587","cifrado":"tls","user":"martinez.aus@gmail.com","pass":"migc mkoq rszu cect","destinos":"jpmartinez@mendoza.gov.ar"} | Asunto: Trace Alertas
+[2026-11-16 19:35:59] [ERROR] [MOD:MAILER] [IP:172.18.0.1] Fallo al enviar correo: SMTP Error: Could not connect to SMTP host. Failed to connect to server SMTP server error: Failed to connect to server Additional SMTP info: php_network_getaddresses: getaddrinfo for smtp.gmail.com failed: Temporary failure in name resolution
+[2026-11-16 21:35:45] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo solicitado. Parámetros: {"host":"smtp.gmail.com","puerto":"587","cifrado":"tls","user":"martinez.aus@gmail.com","pass":"migc mkoq rszu cect","destinos":"jpmartinez@mendoza.gov.ar"} | Asunto: Trace Alertas
+[2026-11-16 21:35:50] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas

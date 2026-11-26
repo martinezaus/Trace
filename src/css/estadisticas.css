@@ -1,0 +1,47 @@
+/* Ajustes para que los charts queden sobre el fondo gris del contenedor */
+.chart-wrap-grey{
+  width: 100%;
+  background: #f3f4f6;
+  border-radius: .5rem;
+  padding: 10px;
+}
+
+.chart-wrap-grey--sm{
+  height: 310px;
+}
+
+.chart-wrap-grey--lg{
+  height: 510px;
+}
+
+
+.chart-wrap-grey > canvas{
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  background: transparent;
+}
+
+/* Distribución de tarjetas sobre el wrap gris */
+.estadisticas-grid{
+  background: #f3f4f6;
+  padding: 12px;
+  border-radius: .75rem;
+}
+
+.estadisticas-grid .card{
+  background: transparent;
+  box-shadow: none !important;
+}
+
+.estadisticas-grid .card-header{
+  margin: 0;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.estadisticas-grid .card-body{
+  background: #f3f4f6;
+  padding-bottom: 0.5rem;
+}
+

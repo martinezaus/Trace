@@ -1,0 +1,34 @@
+{
+  "version": "release-0008",
+  "release_id": "0008",
+  "release_version": "1.0.7",
+  "files": [
+    {
+      "path": "api/ordenes.php",
+      "sha256": "0AF068B6F5033EDB4F86198B2D7B4985E4C9FC7B7347F4BCDB736AA9CBAB6DAC",
+      "previousSha256": "B72A9358B9E055F850BE62FDAB7254FC60062261AB40A9CCD3B475C8D0F70CAC"
+    }
+  ],
+  "packageFiles": [
+    {
+      "path": "trace.bat",
+      "sha256": "46DF6ADE7B746AC8BFC20AFAFDE14439B5DDC4F43DE658887FE27EB08D9D370F"
+    },
+    {
+      "path": "update.ps1",
+      "sha256": "535481892A93C1D68AA8ADE55CE75CC7180C37FBFF6232AFDEA34A9E851028C5"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "2C76A2FCC0E90B5E9E5E252DBE3D35AFB9955196DADC0C2F5DFB06137A8D0B60"
+    },
+    {
+      "path": "migrations/005_delete_preflight.php",
+      "sha256": "CBAF917FF7D05D11DF17F7C078602916CE3E0331598D24096DC9257CA73B3C16"
+    },
+    {
+      "path": "LEEME.md",
+      "sha256": "A38510ACE13FE62C1388D5283065C35DCB16EABF2773248FF30950008591CAA6"
+    }
+  ]
+}

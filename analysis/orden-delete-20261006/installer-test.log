@@ -1,0 +1,72 @@
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+Dependencias de eliminacion verificadas. No hay migraciones de datos.
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]
+OK: simulacion sin cambios.
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+Dependencias de eliminacion verificadas. No hay migraciones de datos.
+Validacion de eliminacion completada. Detalle en C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion\update-backups\release-0007_20261006_170819_235\eliminacion-validacion.json
+Actualizacion aplicada. Respaldo: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion\update-backups\release-0007_20261006_170819_235
+Log: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion\update-logs\release-0007_20261006_170819_235.log
+OK: aplicacion aislada, archivos y respaldos verificados.
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+Release 0007 ya aplicado y verificado. No se repite.
+OK: segunda aplicacion no se repite.
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\instalacion
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+ADVERTENCIA: Los archivos de destino difieren de la base del paquete: api/ordenes.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\paquete\update.ps1 : No se 
+sobrescriben versiones diferentes. Revisar el paquete contra esa instalacion.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: no sobrescribe codigo de otra version.
+Pruebas del instalador completadas con Docker simulado: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\fallo-migracion
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+Dependencias de eliminacion verificadas. No hay migraciones de datos.
+ADVERTENCIA: Los archivos nuevos se conservan. Verifique el registro en BD antes de reintentar: la confirmacion puede 
+haberse perdido.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\paquete\update.ps1 : Docker 
+fallo (1): Fallo simulado de migracion
+ 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\fallo-migracion
+Archivo: api/ordenes.php
+Archivo: include/orden_delete_service.php
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/footer.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\paquete\update.ps1 : 
+Actualizacion interrumpida o en curso. Revisar soporte y respaldo: 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: fallo de migracion conserva respaldo/codigo y bloquea reintento incierto.
+TRACE release-0007 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\fallo-migracion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0007-test-64962571439e4821bc271caf6e5a281b\paquete\update.ps1 : 
+Payload alterado: api/ordenes.php
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: paquete alterado rechazado.

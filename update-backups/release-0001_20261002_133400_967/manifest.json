@@ -1,0 +1,40 @@
+{
+  "version": "release-0001",
+  "files": [
+    {
+      "path": "include/importacion_documentos.php",
+      "sha256": "AC83613CD069DE39998988A8E7365A63A930A43C38B73EEDE65E115D29094AB8",
+      "previousSha256": null
+    },
+    {
+      "path": "include/pages/fileV1.0.1.php",
+      "sha256": "48A9D3C6E4834CA1DB7D4586836F27877FCD9A0A64693B74FD12C07C3F45CF22",
+      "previousSha256": "13444DB2BD42649522552ABA0908B668C8384B35AF4E0782E8BFC8A006884BE8"
+    },
+    {
+      "path": "include/pages/upload.php",
+      "sha256": "AC430DDAEA8F8337B010D04198AF22282B281D2F05899CE976391D80FEB992DD",
+      "previousSha256": "0E6AA708D366020A8DE3E154106B0851EDCB280DE6B79D5E26371C75B51E09C0"
+    }
+  ],
+  "release_id": "0001",
+  "release_version": "1.0.0",
+  "packageFiles": [
+    {
+      "path": "update.ps1",
+      "sha256": "70D258B95644853A1BD64A1B857EC1425EEE794DC79275ED9F4F77EDE04D86AD"
+    },
+    {
+      "path": "trace.bat",
+      "sha256": "C81EAAEBED62FD9BD64A120ABB009C6351EDB4EEBE6EEC9EE40E2B5A614DDE52"
+    },
+    {
+      "path": "migrations/001_codigos_vidrio.php",
+      "sha256": "BA4A099E871A42CD43F5EEDCE33BB15E19E622672D4FD1629BEEE03C745886F1"
+    },
+    {
+      "path": "migrations/002_release_registry.php",
+      "sha256": "0C863C2BFD730C05890CA65A695163DF4F891300B213F06B65D4933614BC7933"
+    }
+  ]
+}

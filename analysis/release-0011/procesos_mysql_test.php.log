@@ -1,0 +1,16 @@
+PASS Reproducido: ENUM original rechaza descarte
+PASS Fallo original conserva proceso abierto
+PASS Migración repetible sin cambios adicionales
+PASS MySQL estricto descarta exactamente 60 segundos
+PASS MySQL cierre repetido no duplica evento
+PASS MySQL permite reiniciar descartada
+PASS Suspender persiste proceso pendiente
+PASS Suspender bloquea tipología hasta reactivación
+PASS Suspensión repetida no duplica pendiente
+PASS Reanudar conserva milisegundos del pendiente
+PASS Reanudación consume pendiente
+PASS Trabajo acumulado supera umbral tras reanudar
+PASS Cierre entre tareas confirma jornada
+PASS Cierre entre tareas no inventa duración
+PASS Reintento de cierre no duplica pendiente
+TOTAL 15 comprobaciones MySQL correctas; tablas temporales destruidas al cerrar conexión.

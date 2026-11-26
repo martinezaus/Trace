@@ -1,0 +1,1 @@
+{"resultado":"ERROR","error":"La orden ya existe en el sistema."}

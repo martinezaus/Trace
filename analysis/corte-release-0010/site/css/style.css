@@ -1,0 +1,217 @@
+
+/* === Reset básico === */
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #f5faff; /* Blanco azulado suave */
+}
+
+/* === Layout General === */
+.page-wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* === SIDEBAR === */
+.sidebar {
+    width: 360px;
+    background: #ffffff;
+    border-right: 1px solid #dbe7f3; /* celeste suave */
+    padding: 10px 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: 2px 0 8px rgba(0, 70, 140, 0.05); /* sombra profesional */
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente si hay más alto */
+    height: 100px; /* Ajusta según el tamaño que prefieras */
+    margin-bottom: 10px;
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block; /* Asegura que no haya espacio adicional debajo de la imagen */
+}
+
+/* Título menú */
+.menu-title {
+    text-align: center;
+    font-weight: 300;
+    color: #0f4c75; /* Azul corporativo */
+    font-size: 1.1rem;
+}
+
+/* Botón Cambiar Menú */
+.btn-switch {
+    margin: 0 auto;
+    width: 55%;
+    background: #0f7ec2;
+    color: #fff;
+    border: none;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-weight: 400;
+    transition: 0.2s ease;
+}
+
+.btn-switch:hover {
+    background: #0c6aa6;
+}
+
+/* === CONTENIDO === */
+.content {
+    flex: 1;
+    background: #f5faff;
+    overflow-y: auto;
+    padding: 5px;
+    color: #0f4c75;
+}
+
+/* === Contenedor del Grid con dos columnas === */
+.qr-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 5px;
+    padding: 1px;
+    overflow: hidden;
+    max-height: 100%; /* Asegura que no haya desplazamiento vertical */
+    height: 100%;
+}
+
+/* === Ajustes para cada ítem QR === */
+.qr-item {
+    background: #ffffff;
+    border-radius: 0px;
+    padding: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    transition: 0.2s;
+    box-shadow: 0 2px 6px rgba(0, 70, 140, 0.06);
+    height: auto; /* Se ajusta automáticamente a su contenido */
+    max-height: 80px; /* Limita la altura máxima */
+}
+
+/* === Ajustes para las imágenes de QR === */
+.qr-img {
+    width: 50%;
+    height: 50%;
+    object-fit: contain; /* Ajusta las imágenes sin deformarlas */
+    max-width: 50px; /* Tamaño fijo para la imagen */
+    max-height: 50px; /* Tamaño fijo */
+    /*margin-bottom: 10px;*/
+}
+
+/* === Títulos de los QR más pequeños === */
+.qr-title {
+    font-size: 9px; /* Reducir tamaño del título */
+    color: #0f4c75; /* Color corporativo */
+    font-weight: 500;
+    /*margin-bottom: 5px;*/
+    text-align: center;
+}
+
+.qr-item-special {
+    grid-column: span 2;
+}
+
+.qr-item-special .qr-img {
+    max-width: 100px;
+    max-height: 100px;
+}
+
+/* === Media Queries para dispositivos pequeños === */
+@media (max-width: 768px) {
+    .qr-grid {
+        grid-template-columns: 1fr; /* En pantallas pequeñas se adapta a una columna */
+    }
+
+    .qr-img {
+        max-width: 50px; /* Ajustamos el tamaño de las imágenes en pantallas pequeñas */
+        max-height: 50px;
+    }
+    .qr-title {
+        font-size: 12px; /* Reducimos aún más el tamaño de los títulos en pantallas pequeñas */
+    }
+}
+
+
+/* === Modo Oscuro Automático === */
+@media (prefers-color-scheme: dark) {
+    body { background: #0d1b2a; }
+    .sidebar {
+        background: #1b263b;
+        border-color: #415a77;
+        box-shadow: none;
+    }
+    .menu-title { color: #e0e1dd; }
+    .content { background: #0d1b2a; color: #e0e1dd; }
+    .qr-item {
+        background: #1b263b;
+        border-color: #415a77;
+        box-shadow: none;
+    }
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: auto;  /* Las columnas se ajustan al contenido de las celdas */
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word; /* Permite que el texto largo se ajuste en la celda */
+}
+
+th {
+    background-color: #333;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+
+/*=========================   ======================*/
+.btn-revertir{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    border:1.5px solid var(--blue-line-soft);
+    background:#fff;
+    color:var(--blue-line-soft);
+    cursor:pointer;
+    padding:0;
+    transition:border-color .15s ease, color .15s ease, background .15s ease, transform .2s ease;
+  }
+  
+  .btn-revertir:hover{
+    border-color:var(--amber);
+    color:var(--amber-dark);
+    background:#fff6ea;
+  }
+  
+  .btn-revertir:hover svg{
+    transform:rotate(-70deg);
+    transition:transform .3s ease;
+  }
+  
+  .btn-revertir:active{
+    transform:scale(0.92);
+  }

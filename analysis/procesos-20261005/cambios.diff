@@ -1,0 +1,1395 @@
+--- backups\procesos_20261005_revision\api\procesos.php
++++ src\api\procesos.php
+@@ -8,6 +8,7 @@
+ 
+ 
+     require_once __DIR__ . '/../include/procesos_fecha.php';
++    require_once __DIR__ . '/../include/proceso_service.php';
+ 
+     // Verifica si RedBeanPHP está funcionando
+     try{
+@@ -32,7 +33,7 @@
+             $proceso = R::findOne('procesos','id = ? ', [$_POST['id']]);
+             if($proceso){
+                 $tarea_codigo = R::getCell("SELECT codigo FROM tareas WHERE tareas.id = ?", [$proceso->tarea_id]);
+-                $response[]=['id' => $proceso->id, 'tarea_id' => $proceso->tarea_id, 'tarea_codigo' => $tarea_codigo];
++                $response[]=['id' => $proceso->id, 'tarea_id' => $proceso->tarea_id, 'tarea_codigo' => $tarea_codigo, 'estado' => (int)$proceso->estado];
+             }
+             echo json_encode($response); // Enviar JSON
+         }elseif($_POST['accion']==='view'){
+@@ -58,53 +59,21 @@
+ 			}
+ 			echo json_encode($response);
+         }elseif($_POST['accion']==='add'){
+-            $proceso_existente = R::findOne('procesos', 'tarea_id = ? AND detalle_id = ?', [$_POST['tarea'], $_POST['detalle']]);
+-
+-            if ($proceso_existente) {
+-                if ((int)$proceso_existente->estado === 2) {
+-                    // Ya terminada de verdad: bloquear
+-                    echo json_encode(['id' => 0, 'retomada' => false]);
+-                    exit;
+-                } else {
+-                    if ((int)$proceso_existente->estado === 4) {
+-                        $proceso_existente->inicio = procesoFechaLocal();
+-                        $proceso_existente->tiempo_real = '00:00:00';
+-                        $proceso_existente->fin = null;
+-                        $proceso_existente->operador_aux = 0;
+-                    }
+-                    // Estaba en 0 (pendiente) o 1 (en curso, colgada): retomarla
+-                    $proceso_existente->estado      = 1;
+-                    $proceso_existente->fin = null;
+-                    $proceso_existente->operador_id = $_POST['operador'];
+-                    if (!empty($_POST['operadorAux']) && $_POST['operadorAux'] != 0 && $_POST['operadorAux'] !== '') {
+-                        $proceso_existente->operador_aux = (int) $_POST['operadorAux'];
+-                    }
+-                    $id = R::store($proceso_existente);
+-                    echo json_encode(['id' => $id, 'retomada' => true]);
+-                    exit;
+-                }
+-            } else {
+-                try {
+-                    $proceso = R::dispense('procesos');
+-                    $proceso->inicio = procesoFechaLocal();
+-                    $proceso->created = $proceso->inicio;
+-                    $proceso->fin = null;
+-                    $proceso->tarea_id     = $_POST['tarea'];
+-                    $proceso->estado       = $_POST['estado'];
+-                    $proceso->detalle_id   = $_POST['detalle'];
+-                    $proceso->operador_id  = $_POST['operador'];
+-                    if (!empty($_POST['operadorAux']) && $_POST['operadorAux'] != 0 && $_POST['operadorAux'] !== '') {
+-                        $proceso->operador_aux = (int) $_POST['operadorAux'];
+-                    } else {
+-                        $proceso->operador_aux = 0;
+-                    }
+-                    $id = R::store($proceso);
+-                    echo json_encode(['id' => $id, 'retomada' => false]);
+-                } catch (Throwable $e) {
+-                    echo json_encode(['id' => 0, 'retomada' => false]);
+-                }
+-                exit;
++            try {
++                $service=new ProcesoService(R::getDatabaseAdapter()->getDatabase()->getPDO());
++                echo json_encode($service->start((int)($_POST['tarea']??0),(int)($_POST['detalle']??0),(int)($_POST['operador']??0),(int)($_POST['operadorAux']??0),(int)($_POST['pendienteId']??0)));
++            } catch(Throwable $e) {
++                error_log('Inicio de proceso: '.$e->getMessage());
++                echo json_encode(['id'=>0,'retomada'=>false,'error'=>'No se pudo iniciar la tarea.']);
+             }
++            exit;
++        }elseif($_POST['accion']==='suspender'){
++            try {
++                $data=json_decode($_POST['datos']??'',true,512,JSON_THROW_ON_ERROR);
++                $service=new ProcesoService(R::getDatabaseAdapter()->getDatabase()->getPDO());
++                echo json_encode($service->savePending($data));
++            }catch(Throwable $e){error_log('Suspender proceso: '.$e->getMessage());echo json_encode(['status'=>'error']);}
++            exit;
+         }elseif($_POST['accion']==='contarCompletadas'){
+             // Usado al reanudar una orden: cuenta cuántas tareas ya se completaron
+             // de esta tipología, consultando directo la fuente de verdad (no un contador
+@@ -113,55 +82,14 @@
+             echo json_encode(['completadas' => (int)$completadas]);
+             exit;
+         }elseif($_POST['accion']==='update'){
+-			$proceso = R::load('procesos', $_POST['id']);
+-			if($proceso->id) {
+-                // Repetir un cierre no cambia la fecha final ni duplica eventos.
+-                if (in_array((int)$proceso->estado, [2,4], true)) {
+-                    echo json_encode([['status'=>'ok','id'=>$proceso->id,'descartada'=>(int)$proceso->estado===4]]);
+-                    exit;
+-                }
+-
+-                $duracionMs = filter_var($_POST['tiempo'] ?? null, FILTER_VALIDATE_INT);
+-                if ($duracionMs === false || $duracionMs < 0) {
+-                    echo json_encode([['status' => 'error', 'id' => 0]]);
+-                    exit;
+-                }
+-                // La regla se aplica al cierre de armado, no al de corte.
+-                $descartada = ($_POST['circuito'] ?? '') === 'armado'
+-                    && (int)$_POST['estado'] === 2 && $duracionMs <= 60000;
+-                try {
+-                    // Tablas existentes: evita DDL y habilita la transaccion de RedBean.
+-                    R::freeze(true);
+-                    R::begin();
+-                    if ($descartada && (int)$proceso->estado !== 4) {
+-                        $evento = R::dispense('eventos');
+-                        $evento->proceso_id = $proceso->id;
+-                        $evento->tipo = 'lectura_descartada';
+-                        $evento->descripcion = 'Descartada por duracion de hasta 60 segundos; tarea='
+-                            . $proceso->tarea_id . '; detalle=' . $proceso->detalle_id
+-                            . '; ayudante=' . $proceso->operador_aux . '; duracion_ms=' . $duracionMs;
+-                        $evento->tiempo_real = msToTime($duracionMs);
+-                        $evento->operador_id = $proceso->operador_id;
+-                        $evento->created = procesoFechaLocal();
+-                        R::store($evento);
+-                    }
+-                    $proceso->estado = $descartada ? 4 : $_POST['estado'];
+-                    $proceso->tiempo_real = msToTime($duracionMs);
+-                    $proceso->fin = in_array((int)$proceso->estado, [2,4], true) ? procesoFechaLocal() : null;
+-                    R::store($proceso);
+-                    R::commit();
+-                    $response[]=["status" => "ok", "id" => $proceso->id, 'descartada' => $descartada];
+-                } catch (Throwable $e) {
+-                    R::rollback();
+-                    $response[]=['status' => 'error', 'id' => 0];
+-                }
+-                
+-			}else{
+-                $response[]=["status" => "error", "id" => 0];
++            try {
++                $service=new ProcesoService(R::getDatabaseAdapter()->getDatabase()->getPDO());
++                $response[]=$service->close((int)($_POST['id']??0),$_POST['tiempo']??null,(int)($_POST['estado']??-1),(string)($_POST['circuito']??''));
++            } catch(Throwable $e) {
++                error_log('Cierre de proceso: '.$e->getMessage());
++                $response[]=['status'=>'error','id'=>0];
+             }
+             echo json_encode($response);
+             exit;
+         }
+     }
+-
+-?>
+--- backups\procesos_20261005_revision\api\sesiones.php
++++ src\api\sesiones.php
+@@ -7,6 +7,8 @@
+     require_once 'rb-mysql.php';
+     require_once '../include/log.php';
+     require_once '../include/functions.php';
++    require_once '../include/procesos_fecha.php';
++    require_once '../include/proceso_service.php';
+ 
+     // Verifica si RedBeanPHP está funcionando
+     try {
+@@ -63,49 +65,12 @@
+             }
+ 
+             try {
+-                R::begin();
+-                $sesion = R::load('sesiones', $sesionId);
+-                if (!$sesion->id) throw new RuntimeException('Sesión no encontrada');
+-
+-                // eventos se relaciona con el proceso, no directamente con la orden.
+-                // El fallback permite cerrar jornadas iniciadas por versiones del
+-                // cliente que aún no enviaban procesoId dentro de datosEvento.
+-                $procesoIdEvento = (int)($datosEvento['procesoId'] ?? $datosCierre['procesoId'] ?? 0);
+-                $evento = R::dispense('eventos');
+-                $evento->proceso_id = $procesoIdEvento > 0 ? $procesoIdEvento : null;
+-                $evento->tipo = $datosEvento['tipo'] ?? 'cierre_jornada';
+-                // codigo_id tiene clave foránea: 0 no representa un código válido.
+-                // El cierre de jornada no tiene código de pausa/suspensión asociado.
+-                // $codigoIdEvento = (int)($datosEvento['codigo_id'] ?? 0);
+-                // $evento->codigo_id = $codigoIdEvento > 0 ? $codigoIdEvento : null;
+-                // $evento->codigo_sub = (int)($datosEvento['codigo_sub'] ?? 0);
+-                $evento->descripcion = $datosEvento['descripcion'] ?? '';
+-                $evento->tiempo_real = milisegundosToTime((int)($datosEvento['tiempo'] ?? 0));
+-                $evento->operador_id = (int)($datosEvento['operadorId'] ?? 0);
+-                $eventoId = R::store($evento);
+-
+-                $pendiente = R::dispense('pendientes');
+-                $pendiente->orden_id = (int)($datosCierre['ordenId'] ?? 0);
+-                $pendiente->detalle_id = (int)($datosCierre['detalleId'] ?? 0);
+-                $pendiente->proceso_id = (int)($datosCierre['procesoId'] ?? 0);
+-                $pendiente->sesion_id = $sesionId;
+-                $pendiente->tarea_actual_id = (int)($datosCierre['tareaActualId'] ?? 0);
+-                $pendiente->tiempo_orden_ms = (int)($datosCierre['tiempoOrdenMs'] ?? 0);
+-                $pendiente->tiempo_tarea_ms = (int)($datosCierre['tiempoTareaMs'] ?? 0);
+-                $pendiente->tiempo_tarea_total_ms = (int)($datosCierre['tiempoTareaTotalMs'] ?? 0);
+-                $pendiente->tiempo_operador_ms = (int)($datosCierre['tiempoOperadorMs'] ?? 0);
+-                $pendiente->menu = $datosCierre['menu'] ?? null;
+-                $pendienteId = R::store($pendiente);
+-
+-                $sesion->fecha_fin = date('Y-m-d H:i:s');
+-                $sesion->estado = $datosSesion['estado'] ?? 'cerrada_con_actividad';
+-                R::store($sesion);
+-                R::commit();
+-                echo json_encode([['status' => 'ok', 'pendienteId' => $pendienteId, 'eventoId' => $eventoId]]);
+-            } catch (Throwable $e) {
+-                R::rollback();
+-                registrarLog('ERROR', 'SESION', 'Cierre transaccional fallido: ' . $e->getMessage());
+-                echo json_encode([['status' => 'error', 'valor' => $e->getMessage()]]);
++                $datosCierre['sesionId']=$sesionId;
++                $service=new ProcesoService(R::getDatabaseAdapter()->getDatabase()->getPDO());
++                echo json_encode([$service->savePending($datosCierre,true)]);
++            } catch(Throwable $e) {
++                registrarLog('ERROR','SESION','Cierre transaccional fallido: '.$e->getMessage());
++                echo json_encode([['status'=>'error','valor'=>'No se pudo guardar el cierre.']]);
+             }
+         }else if ($accion === 'update') {
+             $sesion = R::findOne('sesiones', 'sesiones.id = ?', [$_POST['id'] ?? null]);
+--- backups\procesos_20261005_revision\include\footer.php
++++ src\include\footer.php
+@@ -59,9 +59,9 @@
+             <script src="<?= $baseUrl ?>plugins/js/jquery.cronometro.js"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.lecturabarcode.js"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.fecha.js"></script>
+-            <script src="<?= $baseUrl ?>plugins/js/jquery.procesoV1.0.3.js?v=release-0004"></script>
+-            <script src="<?= $baseUrl ?>plugins/js/jquery.procesopausaV1.0.3.js"></script>
+-            <script src="<?= $baseUrl ?>plugins/js/jquery.procesosuspenderV1.0.3.js"></script>
++            <script src="<?= $baseUrl ?>plugins/js/jquery.procesoV1.0.3.js?v=20261005-procesos-1"></script>
++            <script src="<?= $baseUrl ?>plugins/js/jquery.procesopausaV1.0.3.js?v=20261005-procesos-1"></script>
++            <script src="<?= $baseUrl ?>plugins/js/jquery.procesosuspenderV1.0.3.js?v=20261005-procesos-1"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.documentos.js?v=20260928-1"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.session.js"></script>
+             <?php break;
+@@ -71,8 +71,8 @@
+             <script src="<?= $baseUrl ?>plugins/js/jquery.functions.js"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.lecturabarcode.js"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.fecha.js"></script>
+-            <script src="<?= $baseUrl ?>plugins/js/jquery.corte_pdf.js?v=20260929-2"></script>
+-            <script src="<?= $baseUrl ?>plugins/js/jquery.corte_documentos.js?v=20260929-2"></script>
++            <script src="<?= $baseUrl ?>plugins/js/jquery.corte_pdf.js?v=20261005-procesos-1"></script>
++            <script src="<?= $baseUrl ?>plugins/js/jquery.corte_documentos.js?v=20261005-procesos-1"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.archivo.js"></script>
+             <script src="<?= $baseUrl ?>plugins/js/jquery.session.js"></script>
+             <?php break;
+--- /dev/null
++++ src\include\proceso_service.php
+@@ -0,0 +1,104 @@
++<?php
++/** Persistencia de inicio/cierre; cada transición bloquea la fila antes de decidir. */
++final class ProcesoService {
++    public function __construct(private PDO $db) {}
++    private function query(string $sql, array $args=[]): PDOStatement {
++        $q=$this->db->prepare($sql);$q->execute($args);return $q;
++    }
++    private function lock(): string { return $this->db->getAttribute(PDO::ATTR_DRIVER_NAME)==='mysql'?' FOR UPDATE':''; }
++    private function ms($time): int {
++        if (!preg_match('/^(\d+):([0-5]\d):([0-5]\d)$/',(string)$time,$m)) return 0;
++        return ((int)$m[1]*3600+(int)$m[2]*60+(int)$m[3])*1000;
++    }
++    private function time(int $ms): string {
++        $s=intdiv($ms,1000);return sprintf('%02d:%02d:%02d',intdiv($s,3600),intdiv($s%3600,60),$s%60);
++    }
++    public function start(int $task,int $detail,int $operator,int $helper,int $pendingId=0): array {
++        if ($task<=0 || $detail<=0 || $operator<=0) throw new InvalidArgumentException('Datos de tarea incompletos.');
++        $this->db->beginTransaction();
++        try {
++            $d=$this->query('SELECT * FROM detalles WHERE id=?'.$this->lock(),[$detail])->fetch(PDO::FETCH_ASSOC);
++            if (!$d || in_array((int)$d['c_estado'],[2,3],true)) throw new RuntimeException('Tipología suspendida o terminada.');
++            if (!$this->query('SELECT id FROM tareas WHERE id=?',[$task])->fetchColumn()) throw new RuntimeException('Tarea inexistente.');
++            $p=$this->query('SELECT * FROM procesos WHERE tarea_id=? AND detalle_id=? ORDER BY id DESC LIMIT 1'.$this->lock(),[$task,$detail])->fetch(PDO::FETCH_ASSOC);
++            if ($p && (int)$p['estado']===2) throw new RuntimeException('Tarea ya realizada.');
++            $other=$this->query('SELECT id FROM procesos WHERE detalle_id=? AND estado=1 AND tarea_id<>? LIMIT 1',[$detail,$task])->fetchColumn();
++            if ($other) throw new RuntimeException('La tipología ya tiene otra tarea activa.');
++            $pending=null;
++            if ($pendingId) {
++                $pending=$this->query('SELECT * FROM pendientes WHERE id=? AND detalle_id=? AND valided=0'.$this->lock(),[$pendingId,$detail])->fetch(PDO::FETCH_ASSOC);
++                if (!$pending || !$p || (int)$pending['proceso_id']!==(int)$p['id']) throw new RuntimeException('El pendiente ya cambió. Recargue la tipología.');
++            }
++            $now=procesoFechaLocal();$resumed=false;$elapsed=0;
++            if ($p) {
++                if ((int)$p['estado']===1 && (int)$p['operador_id']!==$operator && !$pending) throw new RuntimeException('Otro operario tiene esta tarea activa.');
++                $reset=in_array((int)$p['estado'],[3,4],true);
++                $resumed=!$reset;$elapsed=$reset?0:max($this->ms($p['tiempo_real']),(int)($pending['tiempo_tarea_ms']??0));
++                $this->query('UPDATE procesos SET estado=1,fin=NULL,operador_id=?,operador_aux=?,inicio=?,tiempo_real=? WHERE id=?',[$operator,$helper,$reset?$now:$p['inicio'],$this->time($elapsed),$p['id']]);
++                $id=(int)$p['id'];
++            } else {
++                $this->query('INSERT INTO procesos (tarea_id,detalle_id,estado,operador_id,operador_aux,inicio,created,tiempo_real) VALUES (?,?,1,?,?,?,?,?)',[$task,$detail,$operator,$helper,$now,$now,'00:00:00']);
++                $id=(int)$this->db->lastInsertId();
++            }
++            if ($pending) $this->query('UPDATE pendientes SET valided=1,updated=? WHERE id=?',[$now,$pendingId]);
++            $this->db->commit();return ['id'=>$id,'retomada'=>$resumed,'tiempo_ms'=>$elapsed];
++        } catch(Throwable $e) {if($this->db->inTransaction())$this->db->rollBack();throw $e;}
++    }
++    public function savePending(array $data,bool $closeDay=false): array {
++        $session=(int)($data['sesionId']??0);$operator=(int)($data['operadorId']??0);
++        $detail=(int)($data['detalleId']??0);$process=(int)($data['procesoId']??0);
++        foreach(['tiempoOrdenMs','tiempoTareaMs','tiempoTareaTotalMs','tiempoOperadorMs'] as $field) {
++            $v=filter_var($data[$field]??0,FILTER_VALIDATE_INT);
++            if($v===false || $v<0)throw new InvalidArgumentException('Tiempo inválido.');
++            $data[$field]=$v;
++        }
++        $this->db->beginTransaction();
++        try {
++            $sessionRow=$this->query('SELECT * FROM sesiones WHERE id=? AND operador_id=?'.$this->lock(),[$session,$operator])->fetch(PDO::FETCH_ASSOC);
++            if(!$sessionRow)throw new RuntimeException('Sesión inexistente.');
++            if($sessionRow['estado']!=='activa') {
++                if($closeDay){$this->db->commit();return ['status'=>'ok'];}
++                throw new RuntimeException('La jornada ya está cerrada.');
++            }
++            $d=$this->query('SELECT * FROM detalles WHERE id=?'.$this->lock(),[$detail])->fetch(PDO::FETCH_ASSOC);
++            if(!$d || (int)$d['orden_id']!==(int)($data['ordenId']??0) || (int)$d['c_estado']===3)throw new RuntimeException('Tipología inválida.');
++            $existing=$this->query('SELECT id FROM pendientes WHERE detalle_id=? AND sesion_id=? AND proceso_id=? AND valided=0 ORDER BY id DESC LIMIT 1',[$detail,$session,$process])->fetchColumn();
++            if($existing && !$closeDay){$this->db->commit();return ['status'=>'ok','pendienteId'=>(int)$existing];}
++            $now=procesoFechaLocal();
++            if($process){
++                $p=$this->query('SELECT * FROM procesos WHERE id=?'.$this->lock(),[$process])->fetch(PDO::FETCH_ASSOC);
++                if(!$p || (int)$p['detalle_id']!==$detail || (int)$p['operador_id']!==$operator || !in_array((int)$p['estado'],[0,1],true))throw new RuntimeException('La tarea cambió; no se guardó el pendiente.');
++                $this->query('UPDATE procesos SET estado=0,tiempo_real=?,fin=NULL WHERE id=?',[$this->time($data['tiempoTareaMs']),$process]);
++                $task=(int)$p['tarea_id'];
++            } else { $task=0;$data['tiempoTareaMs']=0; }
++            $this->query('INSERT INTO pendientes (orden_id,detalle_id,proceso_id,sesion_id,tarea_actual_id,tiempo_orden_ms,tiempo_tarea_ms,tiempo_tarea_total_ms,tiempo_operador_ms,menu,valided) VALUES (?,?,?,?,?,?,?,?,?,?,0)',[(int)$data['ordenId'],$detail,$process,$session,$task,$data['tiempoOrdenMs'],$data['tiempoTareaMs'],$data['tiempoTareaTotalMs'],$data['tiempoOperadorMs'],$data['menu']??1]);
++            $id=(int)$this->db->lastInsertId();
++            $type=$closeDay?'cierre_jornada':'suspension';
++            $this->query('INSERT INTO eventos (proceso_id,tipo,descripcion,tiempo_real,operador_id,created) VALUES (?,?,?,?,?,?)',[$process?:null,$type,$type,'00:00:00',$operator,$now]);
++            if($closeDay)$this->query('UPDATE sesiones SET estado=?,fecha_fin=? WHERE id=?',['cerrada_con_actividad',$now,$session]);
++            else $this->query('UPDATE detalles SET c_estado=2 WHERE id=?',[$detail]);
++            $this->db->commit();return ['status'=>'ok','pendienteId'=>$id];
++        } catch(Throwable $e){if($this->db->inTransaction())$this->db->rollBack();throw $e;}
++    }
++    public function close(int $id,$duration,int $state,string $circuit): array {
++        $ms=filter_var($duration,FILTER_VALIDATE_INT);
++        if ($ms===false || $ms<0 || !in_array($state,[0,1,2],true)) throw new InvalidArgumentException('Tiempo o estado inválido.');
++        $this->db->beginTransaction();
++        try {
++            $p=$this->query('SELECT * FROM procesos WHERE id=?'.$this->lock(),[$id])->fetch(PDO::FETCH_ASSOC);
++            if (!$p) throw new RuntimeException('Proceso inexistente.');
++            if (in_array((int)$p['estado'],[2,4],true)) {
++                $this->db->commit();return ['status'=>'ok','id'=>$id,'descartada'=>(int)$p['estado']===4,'tiempo_ms'=>$this->ms($p['tiempo_real'])];
++            }
++            $discard=$circuit==='armado' && $state===2 && $ms<=60000;
++            $now=procesoFechaLocal();
++            if ($discard) {
++                $description='Descartada por duracion de hasta 60 segundos; tarea='.$p['tarea_id'].'; detalle='.$p['detalle_id'].'; ayudante='.$p['operador_aux'].'; duracion_ms='.$ms;
++                $this->query('INSERT INTO eventos (proceso_id,tipo,descripcion,tiempo_real,operador_id,created) VALUES (?,?,?,?,?,?)',[$id,'lectura_descartada',$description,$this->time($ms),$p['operador_id'],$now]);
++            }
++            $final=$discard?4:$state;
++            $this->query('UPDATE procesos SET estado=?,tiempo_real=?,fin=? WHERE id=?',[$final,$this->time($ms),in_array($final,[2,4],true)?$now:null,$id]);
++            $this->db->commit();return ['status'=>'ok','id'=>$id,'descartada'=>$discard,'tiempo_ms'=>$ms];
++        } catch(Throwable $e) {if($this->db->inTransaction())$this->db->rollBack();throw $e;}
++    }
++}
+--- /dev/null
++++ src\scripts\migrar_eventos_descartados.php
+@@ -0,0 +1,26 @@
++<?php
++// Migración aditiva. Sin --apply sólo muestra el diagnóstico. No borra registros.
++if(PHP_SAPI!=='cli'){http_response_code(404);exit;}
++require_once __DIR__.'/../include/config.php';
++function migrarEventosDescartados(PDO $db,bool $apply): array {
++    $changes=[];
++    $type=$db->query("SHOW COLUMNS FROM eventos LIKE 'tipo'")->fetch(PDO::FETCH_ASSOC);
++    if(str_starts_with(strtolower($type['Type']),'enum(') && !str_contains($type['Type'],"'lectura_descartada'")) {
++        $new=substr($type['Type'],0,-1).",'lectura_descartada')";
++        $sql='ALTER TABLE eventos MODIFY tipo '.$new.($type['Null']==='YES'?' NULL':' NOT NULL');
++        if($type['Default']!==null)$sql.=' DEFAULT '.$db->quote($type['Default']);
++        $changes[]=$sql;if($apply)$db->exec($sql);
++    }
++    $desc=$db->query("SHOW COLUMNS FROM eventos LIKE 'descripcion'")->fetch(PDO::FETCH_ASSOC);
++    if(preg_match('/^varchar\((\d+)\)$/i',$desc['Type'],$m) && (int)$m[1]<255) {
++        $sql='ALTER TABLE eventos MODIFY descripcion VARCHAR(255)'.($desc['Null']==='YES'?' NULL':' NOT NULL');
++        if($desc['Default']!==null)$sql.=' DEFAULT '.$db->quote($desc['Default']);
++        $changes[]=$sql;if($apply)$db->exec($sql);
++    }
++    return $changes;
++}
++if(realpath($_SERVER['SCRIPT_FILENAME']??'')===__FILE__){
++    $db=new PDO('mysql:host='.hostBD.';dbname='.nombreBD.';charset=utf8mb4',usuarioBD,claveBD,[PDO::ATTR_ERRMODE=>PDO::ERRMODE_EXCEPTION]);
++    $apply=in_array('--apply',$argv,true);$changes=migrarEventosDescartados($db,$apply);
++    echo json_encode(['aplicado'=>$apply,'cambios'=>$changes],JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE).PHP_EOL;
++}
+--- backups\procesos_20261005_revision\plugins\js\jquery.procesoV1.0.3.js
++++ src\plugins\js\jquery.procesoV1.0.3.js
+@@ -40,7 +40,7 @@
+ 	timerTarea:      0,
+ 	timerPausa:      0,
+ 
+-	// Tiempos acumulados (en segundos)
++	// Tiempos acumulados en milisegundos
+ 	tiempoOrdenMs:      0,
+ 	tiempoTareaMs:      0,
+ 	tiempoTareaTotalMs: 0,
+@@ -51,6 +51,36 @@
+ 
+ };
+ let operador = null;
++
++// Todas las acciones que cambian trabajo comparten un bloqueo hasta confirmar el servidor.
++async function transicionArmado(accion) {
++    if (estado.transicionActiva || estado.jornadaCerrada) {
++        mostrarMensaje("Hay una operación en curso. Espere la confirmación y vuelva a escanear.", "#F27100", 5000, 'mensaje');
++        return;
++    }
++    estado.transicionActiva = true;
++    try { return await accion(); }
++    catch(e) { logger('ERROR','PROCESO',e.message || e); mostrarMensaje('No se pudo completar la operación. Vuelva a intentarlo.','#BD1A00',12000,'mensaje'); }
++    finally { estado.transicionActiva = false; }
++}
++function tiempoTareaActualMs() {
++    return Number(estado.tiempoTareaMs || 0) + (estado.tareaEnCurso && !estado.pausaActiva && estado.inicioTareaTs
++        ? Math.max(0, Date.now() - estado.inicioTareaTs) : 0);
++}
++function limpiarTareaArmado() {
++    detenerTimer($("#timerT"));
++    Object.assign(estado, {tareaEnCurso:false, tareaActualId:0, procesoId:0, pendienteId:0,
++        tiempoTareaMs:0, inicioTareaTs:0, timerTarea:0});
++    $("#timerT").text("00:00:00.00");
++    $("#tarea_nombre").text("");
++}
++function iniciarOrden(codigo) { return transicionArmado(() => iniciarOrdenInterna(codigo)); }
++function seleccionarTipologia(codigo) { return transicionArmado(() => seleccionarTipologiaInterna(codigo)); }
++function iniciarTarea(codigo, band) { return transicionArmado(() => iniciarTareaInterna(codigo, band)); }
++function finalizarTareaActual() { return transicionArmado(finalizarTareaInterna); }
++function finalizarTipologiaActual() { return transicionArmado(finalizarTipologiaInterna); }
++
++
+ 
+ $(document).ready(async () => {
+ 	const inicializado = await initializeDataProceso(new URLSearchParams(window.location.search));
+@@ -304,24 +334,7 @@
+ 			try {
+ 				const respuesta = await $.post(URL_API.detalles, {'accion': 'select', 'barcode': codigoSeleccionado});
+ 				const detalleId = respuesta[0].id;
+-				if (detalleId === estado.detalleActualId) {
+-					// Es la misma tipología pendiente: continuar la tarea que quedó
+-					// console.log("Continúa tarea pendiente");
+-					if (estado.tareaEnCurso === true) {
+-						const codigoTarea = await $.post(URL_API.proceso, {'accion': 'select', 'id': estado.procesoId});
+-						seleccionarTipologia(codigoSeleccionado);
+-						iniciarTarea(codigoTarea[0].tarea_codigo, estado.tareaEnCurso);
+-					}
+-				}else {
+-					if (estado.tareaEnCurso) {
+-						mostrarMensaje("Debe finalizar o suspender la tarea actual antes de cambiar de tipología.", "#BD1A00", 12000, 'mensaje_modal');
+-						return;
+-					}
+-					// FIX: era "===" (comparacion, no-op) en vez de "=" (asignacion). El flag tareaEnCurso nunca se bajaba al cambiar de tipologia.
+-					estado.tareaEnCurso = false;
+-					// Es una tipología distinta: arrancar una tarea nueva
+-					seleccionarTipologia(codigoSeleccionado);
+-				}
++                await seleccionarTipologia(codigoSeleccionado);
+ 			} catch (error) {
+ 				mostrarMensaje("[ERROR] No se pudo obtener el detalle", "#BD1A00", 9000, 'mensaje_modal');
+ 			}
+@@ -506,7 +519,16 @@
+ }
+ 
+ /** Funcion para mostrar, buscar y ver archivo PDF de la Orden */
+-async function iniciarOrden(codigo) {
++async function iniciarOrdenInterna(codigo) {
++    if (estado.ordenId && String(Number(codigo)) === String(Number(estado.ordenCodigo))) {
++        if (estado.cierreOrdenPendiente) return await finalizarOrdenCompleta();
++        mostrarMensaje("La orden ya está cargada. Continúe con la tarea actual.", "#1E88E5", 9000, 'mensaje');
++        return;
++    }
++    if (estado.tareaEnCurso || estado.pausaActiva) {
++        mostrarMensaje("Finalice o suspenda la tarea antes de cambiar de orden.", "#BD1A00", 12000, 'mensaje');
++        return;
++    }
+ 	try{
+ 		const respuesta = await $.post(URL_API.orden, {accion: "select", barcode:Number(codigo)});
+ 		if(respuesta && respuesta[0] && respuesta[0].id === 0){
+@@ -521,9 +543,16 @@
+ 			return;
+ 		}
+ 
+-		estado.ordenId=orden.id;
++		limpiarTareaArmado();
++        estado.detalleActualId = 0;
++        estado.tareaActualNro = 0;
++        estado.tiempoTareaTotalMs = 0;
++        estado.operadorIdAux = 0;
++        $("#topologia,#label_tpo_ideal,#label_operario_aux").text("");
++        estado.ordenId=orden.id;
+ 		estado.ordenCodigo=orden.codigo;
+ 		estado.ordenEstado=1; //procesando
++        estado.cierreOrdenPendiente=false;
+ 
+         // Esto es por si queremos 
+         // estado.tiempoOperario = 0;
+@@ -804,7 +833,11 @@
+ 
+ }
+ 
+-async function seleccionarTipologia(codigoDetalle) {
++async function seleccionarTipologiaInterna(codigoDetalle) {
++    if (estado.tareaEnCurso || estado.pausaActiva) {
++        mostrarMensaje("Hay una tarea activa. Finalícela o suspéndala antes de seleccionar otra tipología.", "#1E88E5", 10000, 'mensaje');
++        return;
++    }
+ 	try {
+ 		const respuesta = await $.post(URL_API.detalles, {accion: "select", barcode: codigoDetalle});
+ 		if (!respuesta || !respuesta[0] || respuesta[0].id === 0) {
+@@ -813,12 +846,16 @@
+ 		}
+ 		const detalle = respuesta[0];
+ 
+-		if (Number(detalle.estado) === 2) {
+-			mostrarMensaje("Esta tipología está suspendida. Debe activarla Administración desde el dashboard.", "#FF7700", 15000, 'mensaje');
++		if ([2,3].includes(Number(detalle.estado))) {
++			mostrarMensaje("Esta tipología está suspendida o terminada. Debe activarla Administración desde el dashboard.", "#FF7700", 15000, 'mensaje');
+ 			return;
+ 		}
+ 
+-		estado.detalleActualId = detalle.id;
++		limpiarTareaArmado();
++        estado.tiempoTareaTotalMs = 0;
++        estado.tiempoPausaTotalMs = 0;
++        $("#label_operario_aux").text("");
++        estado.detalleActualId = detalle.id;
+ 		estado.tareaMax        = detalle.etapas;
+ 		estado.operadorIdAux   = 0;
+ 
+@@ -836,7 +873,7 @@
+ 			});
+ 		$("#label_tpo_ideal").html(`${detalle.tiempo_estimado}`);
+ 
+-        if(detalle.ayudante === 1){
++        if(Number(detalle.ayudante) === 1){
+             const operador = await escanearCodigoOperadorAyudante();
+             estado.operadorIdAux = operador.id;
+ 			$("#label_operario_aux").html(`Ayudante: ${operador.nombre}`)
+@@ -893,10 +930,16 @@
+ 					return;
+ 				}
+ 
+-				estado.tareaActualId = Number(tareaPendiente[0].id);
++				const retomada = await $.post(URL_API.proceso,{accion:'add',tarea:Number(tareaPendiente[0].id),
++                    detalle:detalle.id,operador:estado.operadorId,operadorAux:estado.operadorIdAux,
++                    pendienteId:estado.pendienteId},null,'json');
++                if (!Number(retomada?.id)) throw new Error('No se pudo recuperar la tarea pendiente.');
++                estado.procesoId = Number(retomada.id);
++                estado.tiempoTareaMs = Number(retomada.tiempo_ms) || 0;
++                estado.tareaActualId = Number(tareaPendiente[0].id);
+ 				estado.tareaEnCurso  = true;
+-				estado.inicioTareaTs = ahora;
+-				iniciarTimer(ahora, $("#timerT"), estado.tiempoTareaMs);
++				estado.inicioTareaTs = Date.now();
++				iniciarTimer(estado.inicioTareaTs, $("#timerT"), estado.tiempoTareaMs);
+ 				$("#tarea_nombre").html(`${tareaPendiente[0].nombre} (${estado.tareaActualNro + 1})`)
+ 					.css({
+ 						"color": "#B85C00",
+@@ -916,7 +959,7 @@
+ 			mostrarMensaje(`Tipología retomada [${detalle.tipologia}] → continúe con la tarea.`, "#1E88E5", 15000, 'mensaje');
+ 
+ 			// Recién ahora, confirmado que se restauró todo, consumimos el pendiente
+-			const respStatus = await $.post(URL_API.pendiente, {accion: "status", id: estado.pendienteId});
++			const respStatus = estado.tareaEnCurso ? [{status:"ok"}] : await $.post(URL_API.pendiente, {accion: "status", id: estado.pendienteId});
+ 			logger("INFO", "PROCESO", "Pendiente consumido: " + JSON.stringify(respStatus[0]));
+ 
+ 			return;
+@@ -924,8 +967,10 @@
+ 
+ 		// Tipología nueva (o ya activa, sin nada que resumir): arrancamos de cero
+ 		estado.tareaActualId  = 0;
+-		estado.tareaActualNro = 0;
+-		estado.tareaEnCurso   = false;
++		const conteoActual = await $.post(URL_API.proceso, {accion: "contarCompletadas", detalle: detalle.id});
++        if (!Number.isFinite(Number(conteoActual?.completadas))) throw new Error('No se pudo recuperar el avance');
++        estado.tareaActualNro = Number(conteoActual.completadas);
++        estado.tareaEnCurso = false;
+ 
+ 		mostrarMensaje(`Topología seleccionada[`+detalle.tipologia+`] → escanee tarea.`, "#32A123", 15000, 'mensaje');
+ 	} catch(e) {
+@@ -935,7 +980,7 @@
+ 	}
+ }    
+ 
+-async function iniciarTarea(codigoTarea, band){
++async function iniciarTareaInterna(codigoTarea, band){
+ 	// console.log(codigoTarea + " " + band + " : " + estado);
+ 
+ 	if (!estado.detalleActualId) {
+@@ -950,43 +995,20 @@
+ 	}
+ 
+ 	const tarea = respuesta[0];
+-	if(band === true){
+-		if (tarea.id !== estado.tareaActualId) {
+-			mostrarMensaje(`Ya hay una tarea en curso (${estado.tareaActualNro}). Debe finalizarla antes de escanear otra.`, "#F27100", 12000, 'mensaje');
+-			return;
+-		}
+-		if (estado.pausaActiva) {
+-			mostrarMensaje("Hay una Pausa activa, debe desactivarla antes. Presione la tecla [F3].", "#BD1A00", 9000, 'mensaje');
+-			return;
+-		}
+-		// Reanudando una tarea que ya estaba en curso (ej: tras una pausa)
+-		try{
+-			const ahora = Date.now();
+-			estado.inicioTareaTs = ahora;
+-			iniciarTimer(ahora, $("#timerT"), estado.tiempoTareaMs);
+-			$("#tarea_nombre").html(`${tarea.nombre} (${estado.tareaActualNro + 1})`)
+-							  .css({"color": "#B85C00",
+-									"background-color": "#FFF3E0",
+-									"border": "1px solid #F27100",
+-									"border-radius": "20px",
+-									"padding": "6px 16px",
+-									"font-weight": "600",
+-									"display": "inline-block",
+-									"transition": "transform 0.25s ease"
+-								});
+-			mostrarMensaje(`Tarea reanudada`, "#1E88E5", 9000, 'mensaje');
+-		}catch(e){
+-			logger("ERROR", "PROCESO","Linea 659, [" + e.responseText + " " + e.statusText + "]");
+-		}
++    if (estado.tareaEnCurso) {
++        const misma = Number(tarea.id) === Number(estado.tareaActualId);
++        mostrarMensaje(misma ? "La tarea ya está en curso; se conserva el tiempo trabajado."
++            : "Debe finalizar la tarea actual antes de escanear otra.", "#F27100", 9000, 'mensaje');
++        return;
+ 	}else{
+ 		if (estado.tareaEnCurso) {
+ 			mostrarMensaje(`Ya hay una tarea en curso (${estado.tareaActualNro}). Debe finalizarla antes.`, "#F27100", 9000, 'mensaje');
+ 			return;
+ 		}
+-		estado.tareaActualId = tarea.id;
++
+ 		try {
+ 			const ahora = Date.now();
+-			iniciarTimer(ahora, $("#timerT"), 0);
++			// El reloj se inicia cuando el servidor confirma el proceso.
+ 			$("#tarea_nombre").html(`${tarea.nombre} (${estado.tareaActualNro + 1})`)
+ 							  .css({"color": "#B85C00",
+ 									"background-color": "#FFF3E0",
+@@ -1000,24 +1022,26 @@
+ 		
+ 			const resultado = await $.post(URL_API.proceso, {
+ 				accion: "add",
+-				tarea: estado.tareaActualId,
++				tarea: tarea.id,
+ 				detalle: estado.detalleActualId,
+ 				estado: 1,
+ 				operador: estado.operadorId,
+ 				operadorAux: estado.operadorIdAux
+ 			});
+ 		
+-			if (!resultado || resultado.id === 0) {
+-				detenerTimer($("#timerT")); // paramos el timer huérfano, ya que no hay proceso real
++			if (!resultado || !(Number(resultado.id) > 0)) {
++				limpiarTareaArmado();
+ 				mostrarMensaje(`Tarea ya realizada o Error`, "#F27100", 9000, 'mensaje');
+ 				return;
+ 			}
+ 
+ 			// Recién ahora, confirmado el éxito, comprometemos el estado local:
+-			estado.procesoId      = resultado.id;
++			estado.tareaActualId = Number(tarea.id);
++            estado.procesoId      = Number(resultado.id);
+ 			estado.tareaEnCurso   = true;
+-			estado.tiempoTareaMs  = 0;
+-			estado.inicioTareaTs  = ahora;
++			estado.tiempoTareaMs = Number(resultado.tiempo_ms) || 0;
++            estado.inicioTareaTs = Date.now();
++            iniciarTimer(estado.inicioTareaTs, $("#timerT"), estado.tiempoTareaMs);
+ 		
+ 			if (resultado.retomada) {
+ 				mostrarMensaje(`Tarea retomada`, "#1E88E5", 9000, 'mensaje');
+@@ -1026,16 +1050,17 @@
+ 			}
+ 	
+ 		} catch(e) {
+-			detenerTimer($("#timerT"));
++			limpiarTareaArmado();
+ 			mostrarMensaje("Error al iniciar tarea", "#8C1701", 15000, 'mensaje');
+ 		}
+ 	}
+ }
+ 
+-async function finalizarTareaActual() {
++async function finalizarTareaInterna() {
++    if (!estado.tareaEnCurso || !estado.procesoId || estado.pausaActiva) return;
+     try {
+         // logger("INFO", "PROCESO", "linea 697: " + JSON.stringify(estado));
+-        const duracionMs = estado.tiempoTareaMs + (Date.now() - estado.inicioTareaTs);
++        let duracionMs = tiempoTareaActualMs();
+         let respuesta = await $.post({
+             url: URL_API.proceso,
+             data: { accion: "update", 
+@@ -1052,7 +1077,8 @@
+             return; // no tocamos timers ni contadores, queda todo consistente
+         }
+ 
+-        // Recién ahora, confirmado el éxito, comprometemos el estado local:
++        // En un reintento usamos la duración que ya confirmó el servidor.
++        if (Number.isFinite(Number(respuesta[0].tiempo_ms))) duracionMs = Number(respuesta[0].tiempo_ms);
+         detenerTimer($("#timerT"));
+         if (respuesta[0].descartada === true) {
+             const ahora = Date.now();
+@@ -1061,15 +1087,7 @@
+             estado.tiempoOrdenMs = Math.max(0, tiempoOrdenActual - duracionMs);
+             estado.inicioOrdenTs = ahora - estado.tiempoOrdenMs;
+             iniciarTimer(ahora, $("#timerO"), estado.tiempoOrdenMs);
+-            estado.tareaEnCurso = false;
+-            estado.tiempoTareaMs = 0;
+-            estado.inicioTareaTs = 0;
+-            estado.timerTarea = 0;
+-            estado.procesoId = 0;
+-            estado.pendienteId = 0;
+-            estado.tareaActualId = 0;
+-            $("#timerT").text("00:00:00.00");
+-            $("#tarea_nombre").text("");
++            limpiarTareaArmado();
+             mostrarMensaje("Lectura descartada por duración de hasta 60 segundos. Escanee la tarea correcta.", "#F27100", 10000, 'mensaje');
+             return;
+         }
+@@ -1086,19 +1104,15 @@
+         // El contador avanza una única vez: al terminar y persistir la tarea.
+         // Antes se incrementaba tanto al iniciarla como al cerrarla, por lo que
+         // podía saltear etapas y finalizar la tipología de forma prematura.
+-        estado.tareaActualNro += 1;
++        estado.tareaActualNro = Number(estado.tareaActualNro) + 1;
++        limpiarTareaArmado();
+ 
+         if (Number(estado.tareaActualNro) >= Number(estado.tareaMax)) {
+             mostrarMensaje(`Se finalizaron todas las Tarea, elija una nueva Tipologia`, "#32A123", 15000, 'mensaje');
+-            finalizarTipologiaActual();
++            await finalizarTipologiaInterna();
+         } else {
+             mostrarMensaje(`Tarea finalizada → escanee la siguiente tarea`, "#32A123", 15000, 'mensaje');
+-            estado.tareaEnCurso  = false;
+-            estado.tiempoTareaMs = 0;
+-            estado.timerTarea    = 0;
+-            estado.procesoId     = 0;
+-            estado.pendienteId   = 0;
+-            // Nota: NO reseteo tiempoTareaTotalMs acá, ver punto 4
++
+         }
+     } catch (e) {
+         mostrarMensaje("Error al actualizar el proceso", "#D32F2F", 10000, 'mensaje');
+@@ -1108,7 +1122,8 @@
+ }
+ 
+ /** FINALIZAR TOPOLOGÍA (cuando termina las 8 tareas) */
+-async function finalizarTipologiaActual() {
++async function finalizarTipologiaInterna() {
++    if (!estado.detalleActualId || estado.tareaEnCurso || estado.pausaActiva) return;
+     try {
+         const respuestaDetalle = await $.post(URL_API.detalles, {
+             accion: "update",
+@@ -1118,18 +1133,18 @@
+         });
+ 
+         // Ajustar esta validación según lo que realmente devuelva detalles.php
+-        if (!respuestaDetalle || respuestaDetalle.status === "error") {
++        if (respuestaDetalle?.status !== "ok") {
+             mostrarMensaje("Error al finalizar la tipología", "#D32F2F", 10000, 'mensaje');
+             logger("ERROR", "PROCESO", "Fallo update detalle id=" + estado.detalleActualId);
+             return; // no tocamos DOM ni estado, queda todo consistente para reintentar
+         }
+ 
+-        // Recién ahora, confirmado el éxito, limpiamos UI y estado
+-        $("#topologia").html(``);
+-        $("#label_tpo_ideal").html(`00:00:00.00`);
+-        $("#timerT").text("00:00:00.00");
+-
+-        let tipologias_pendientes = await $.post(URL_API.detalles, {accion: "last", id_o: estado.ordenId});
++        const tipologias_pendientes = await $.post(URL_API.detalles, {accion: "last", id_o: estado.ordenId});
++        if (!Number.isFinite(Number(tipologias_pendientes)) || tipologias_pendientes === null) throw new Error('No se pudo consultar el avance de la orden');
++        // Limpiar después de confirmar también el avance de la orden.
++        limpiarTareaArmado();
++        $("#topologia,#label_operario_aux").text("");
++        $("#label_tpo_ideal").text("00:00:00.00");
+ 
+         estado.detalleActualId    = 0;
+         estado.tareaActualNro     = 0;
+@@ -1141,7 +1156,8 @@
+         // estado.tiempoOperario NO se resetea acá: es el acumulado total del operario
+ 
+         if (Number(tipologias_pendientes) === 0) {
+-            finalizarOrdenCompleta();
++            estado.cierreOrdenPendiente = true;
++            await finalizarOrdenCompleta();
+         } else {
+             mostrarMensaje("Tipología terminada → escanee la siguiente Tipologia a trabajar", "#32A123", 15000, 'mensaje');
+         }
+@@ -1156,7 +1172,6 @@
+ /** FINALIZAR ORDEN COMPLETA */
+ async function finalizarOrdenCompleta() {
+     try {
+-        clearInterval(estado.timerOrden);
+ 
+         // Tiempo real de la orden hasta este instante, no el acumulado desactualizado
+         const tiempoOrdenActual = estado.inicioOrdenTs ? (Date.now() - estado.inicioOrdenTs) : (estado.tiempoOrdenMs || 0);
+@@ -1168,16 +1183,18 @@
+         });
+ 
+         if (!respuesta || respuesta.status === "error") {
+-            mostrarMensaje("Error al finalizar la orden", "#D32F2F", 10000, 'mensaje');
++            mostrarMensaje("Error al finalizar la orden. Vuelva a escanear su número para reintentar.", "#D32F2F", 10000, 'mensaje');
+             logger("ERROR", "PROCESO", "Fallo al finalizar orden id=" + estado.ordenId);
+             return;
+         }
+ 
++        detenerTimer($("#timerO"));
++        estado.cierreOrdenPendiente = false;
+         mostrarMensaje("¡ORDEN FINALIZADA COMPLETAMENTE!", "#32A123", 15000, 'mensaje');
+         setTimeout(() => location.reload(), 2000); // ver punto 2
+ 
+     } catch (e) {
+-        mostrarMensaje("Error al finalizar la orden", "#D32F2F", 10000, 'mensaje');
++        mostrarMensaje("Error al finalizar la orden. Vuelva a escanear su número para reintentar.", "#D32F2F", 10000, 'mensaje');
+         logger("ERROR", "PROCESO", "finalizarOrdenCompleta excepción: " + (e.responseText || e.message || e));
+     }
+ }
+@@ -1249,169 +1266,43 @@
+ }
+ 
+ /** Envía el estado actual al backend y limpia la sesión */
+-function registrarFinJornada() {
+-	$('#modal-overlay').remove();
+-	try {
+-		if (!estado.sesionId) {
+-			mostrarMensaje("La sesión todavía no está lista. Espere unos segundos e intente nuevamente.", "#BD1A00", 12000, 'mensaje');
+-			return;
+-		}
+-		if (estado.pausaActiva) {
+-			mostrarMensaje("Debe finalizar la pausa antes de cerrar la jornada.", "#BD1A00", 12000, 'mensaje');
+-			return;
+-		}
+-		// Verifico si existe una tipologia cargada, que este trabajando el operario.
+-		// SI no existe, significa que no tiene cargado ninguna tipologia, y solo cerrara la sesion.
+-		if(estado.detalleActualId === 0){
+-			
+-			const datosCierreSesion = {
+-				fechaf:  new Date(),
+-				estado:  'cerrada_sin_actividad' ,
+-			};
+-	
+-			$.post(URL_API.sesion,{'accion': 'update', 'id': estado.sesionId, 'datos': JSON.stringify(datosCierreSesion)}, function(respuesta){
+-				if (respuesta && respuesta[0] && respuesta[0].status === 'ok'){
+-					logger("INFO", "PROCESO", "linea 1083: " + JSON.stringify(datosCierreSesion) + " - Operador: " + estado.operadorId);				
+-					mostrarMensaje("Jornada finalizada con éxito.", "#32A123", 10000, 'mensaje');
+-
+-					setTimeout(() => {
+-						clearInterval(estado.timerOrden);
+-						location.href = "index.php";
+-					}, 2000);                
+-				} else {
+-					const motivo = respuesta && respuesta[0] ? respuesta[0].valor : 'Respuesta inválida';
+-					logger("ERROR", "PROCESO", "Cierre de sesión fallido: " + motivo + " - Sesión: " + estado.sesionId);
+-					mostrarMensaje("Error al guardar el cierre de jornada: " + motivo, "#BD1A00", 15000, 'mensaje');
+-				}
+-			}, "json").fail((jqXHR, textStatus, errorThrown) => {
+-					logger("FAIL", "PROCESO", "linea 1085. Datos: " + JSON.stringify(datosCierreSesion) + 
+-								   " - Status: " + jqXHR.status + 
+-								   " - TextStatus: " + textStatus + 
+-								   " - Error: " + errorThrown + 
+-								   " - Respuesta cruda: " + jqXHR.responseText);							
+-					mostrarMensaje("Error, al intentar cerrar la jornada.", "#BD1A00", 15000, 'mensaje');
+-			});
+-		}else{
+-
+-			const datosCierreSesion = {
+-				fechaf: new Date(),
+-				estado: 'cerrada_con_actividad' ,
+-			};
+-
+-			// Tiempos reales al instante de cerrar (no los acumulados desactualizados)
+-			const tiempoTareaActual = estado.inicioTareaTs ? ((estado.tiempoTareaMs || 0) + Date.now() - estado.inicioTareaTs) : (estado.tiempoTareaMs || 0);
+-			const tiempoOrdenActual = estado.inicioOrdenTs ? (Date.now() - estado.inicioOrdenTs) : (estado.tiempoOrdenMs || 0);
+-
+-			// FIX: faltaban sesionId y tiempoTareaTotalMs (este último venía comentado).
+-			const datosCierre = {
+-				ordenId:            estado.ordenId,
+-				detalleId:          estado.detalleActualId,
+-				procesoId:          estado.procesoId,
+-				sesionId:           estado.sesionId,
+-				operadorId:         estado.operadorId,
+-				tareaActualId:      estado.tareaActualId,
+-				tiempoOrdenMs:      tiempoOrdenActual,
+-				tiempoTareaMs:      tiempoTareaActual,
+-				tiempoTareaTotalMs: estado.tiempoTareaTotalMs || 0,
+-				tiempoOperadorMs:   estado.tiempoOperario,
+-				menu:               getMenuActual(),
+-			};
+-
+-			const datosEvento = {
+-				descripcion: "cierre_jornada",
+-				procesoId:   estado.procesoId,
+-				operadorId:  estado.operadorId,
+-				tipo:        "cierre_jornada",
+-				codigo_id:   9,
+-				codigo_sub:  0,
+-				tiempo:      0,
+-			};
+-
+-			$.post(URL_API.sesion, {
+-				accion: 'cerrarConPendiente',
+-				sesionId: estado.sesionId,
+-				datosSesion: JSON.stringify(datosCierreSesion),
+-				datosCierre: JSON.stringify(datosCierre),
+-				datosEvento: JSON.stringify(datosEvento)
+-			})
+-				.done(function(respuesta){
+-					if (!respuesta || !respuesta[0] || respuesta[0].status !== 'ok') {
+-						logger("ERROR", "PROCESO", "linea 1130, " + JSON.stringify(datosCierreSesion) + " - Operador: " + estado.operadorId);
+-						mostrarMensaje("Error al guardar el cierre de jornada en el servidor.", "#BD1A00", 15000, 'mensaje');
+-						return;
+-					}
+-
+-					mostrarMensaje("Jornada finalizada con éxito. Tarea pendiente guardada.", "#32A123", 10000, 'mensaje');
+-					estado.tareaActualId      = 0;
+-					estado.tiempoOrdenMs      = 0;
+-					estado.tiempoTareaMs      = 0;
+-					estado.tiempoTareaTotalMs = 0;
+-					estado.procesoId          = 0;
+-					estado.operadorId         = 0;
+-					setTimeout(() => {
+-						clearInterval(estado.timerOrden);
+-						location.href = "index.php";
+-					}, 2000);
+-					return;
+-
+-					$.post(URL_API.evento,{'accion': 'add', 'datos': JSON.stringify(datosEvento)})
+-						.done(function(respEvento){
+-							if (!respEvento || !respEvento[0] || !respEvento[0].id) {
+-								logger("ERROR", "PROCESO", "Linea 1138, Fallo al crear evento de cierre. Operador: " + estado.operadorId);
+-								mostrarMensaje("Error al registrar el evento de cierre.", "#BD1A00", 15000, 'mensaje');
+-								return;
+-							}
+-							datosCierre.eventoId = respEvento[0].id;
+-
+-							$.post(URL_API.pendiente,{'accion': 'add', 'datos': JSON.stringify(datosCierre)})
+-								.done(function(respuesta) {
+-									if (respuesta && respuesta[0] && respuesta[0].status === 'ok'){
+-										logger("INFO", "PROCESO", "linea 1147: " + JSON.stringify(datosCierre) + 
+-													   " - Operador: " + datosCierre.operadorId + 
+-													   " - Evento: "   + datosCierre.eventoId);				
+-										mostrarMensaje("Jornada finalizada con éxito. Guardando tareas pendientes...", "#32A123", 10000);
+-
+-										// Recién ahora, confirmado el guardado, limpiamos el estado local
+-										estado.tareaActualId      = 0;
+-										estado.tiempoOrdenMs      = 0;
+-										estado.tiempoTareaMs      = 0;
+-										estado.tiempoTareaTotalMs = 0;
+-										estado.procesoId          = 0;
+-										estado.operadorId         = 0;
+-
+-										setTimeout(() => {
+-											clearInterval(estado.timerOrden);
+-											location.href = "index.php";
+-										}, 2000);                
+-									} else {
+-										const detalleError = (respuesta && respuesta[0]) ? respuesta[0].valor : '';
+-										logger("ERROR", "PROCESO", "linea 1166: " + JSON.stringify(datosCierre) + " - Operador: " + estado.operadorId + " - " + detalleError);				
+-										mostrarMensaje("Error al guardar el cierre de jornada en el servidor.", "#BD1A00", 15000);
+-									}
+-								})
+-								.fail((jqXHR, textStatus, errorThrown) => {
+-									logger("FAIL", "PROCESO", "linea 1171. Datos: " + JSON.stringify(datosCierre) + 
+-												   " - Status: " + jqXHR.status + 
+-												   " - TextStatus: " + textStatus + 
+-												   " - Error: " + errorThrown + 
+-												   " - Respuesta cruda: " + jqXHR.responseText);							
+-									mostrarMensaje("Error, al intentar cerrar la jornada.", "#BD1A00", 15000);
+-								});
+-						})
+-						.fail((jqXHR, textStatus, errorThrown) => {
+-							logger("FAIL", "PROCESO", "Linea 1180, Fallo al crear evento de cierre: " + textStatus + " - " + jqXHR.responseText);
+-							mostrarMensaje("Error al registrar el evento de cierre.", "#BD1A00", 15000);
+-						});
+-				})
+-				.fail((jqXHR, textStatus, errorThrown) => {
+-					logger("FAIL", "PROCESO", "Linea 1185, Fallo al cerrar sesion: " + textStatus + " - " + jqXHR.responseText);
+-					mostrarMensaje("Error al cerrar la sesión.", "#BD1A00", 15000);
+-				});
+-		}
+-	} catch (e) {
+-		logger("ERROR", "PROCESO", "linea 1177." + e);	
+-
+-	}
++function registrarFinJornada() { return transicionArmado(cerrarJornadaArmado); }
++async function cerrarJornadaArmado() {
++    $('#modal-overlay').remove();
++    if (!estado.sesionId || estado.pausaActiva) {
++        mostrarMensaje("Verifique la sesión y finalice la pausa antes de cerrar la jornada.", "#BD1A00", 12000, 'mensaje');
++        return;
++    }
++    try {
++        const datosSesion = {estado: estado.detalleActualId || estado.tiempoOperario > 0 ? 'cerrada_con_actividad' : 'cerrada_sin_actividad'};
++        let respuesta;
++        if (!estado.detalleActualId) {
++            respuesta = await $.post(URL_API.sesion, {accion:'update', id:estado.sesionId, datos:JSON.stringify(datosSesion)}, null, 'json');
++        } else {
++            const datosCierre = {
++                ordenId:estado.ordenId, detalleId:estado.detalleActualId, sesionId:estado.sesionId,
++                operadorId:estado.operadorId, procesoId:estado.tareaEnCurso ? estado.procesoId : 0,
++                tareaActualId:estado.tareaEnCurso ? estado.tareaActualId : 0,
++                tiempoOrdenMs:estado.inicioOrdenTs ? Date.now()-estado.inicioOrdenTs : (estado.tiempoOrdenMs||0),
++                tiempoTareaMs:estado.tareaEnCurso ? tiempoTareaActualMs() : 0,
++                tiempoTareaTotalMs:estado.tiempoTareaTotalMs||0, tiempoOperadorMs:estado.tiempoOperario||0,
++                menu:getMenuActual()
++            };
++            const evento={tipo:'cierre_jornada',descripcion:'cierre_jornada',procesoId:datosCierre.procesoId,operadorId:estado.operadorId,tiempo:0};
++            respuesta=await $.post(URL_API.sesion,{accion:'cerrarConPendiente',sesionId:estado.sesionId,
++                datosSesion:JSON.stringify(datosSesion),datosCierre:JSON.stringify(datosCierre),datosEvento:JSON.stringify(evento)},null,'json');
++        }
++        if (respuesta?.[0]?.status !== 'ok') throw new Error('El servidor no confirmó el cierre.');
++        estado.jornadaCerrada = true;
++        limpiarTareaArmado();
++        detenerTimer($("#timerO"));
++        detenerTimer($("#timerP"));
++        mostrarMensaje("Jornada finalizada con éxito. Trabajo guardado.", "#32A123", 10000, 'mensaje');
++        setTimeout(() => { location.href='index.php'; }, 1500);
++    } catch (e) {
++        mostrarMensaje("No se pudo cerrar la jornada. El trabajo sigue activo; vuelva a intentarlo.", "#BD1A00", 15000, 'mensaje');
++        logger('ERROR','PROCESO',e.message || e);
++    }
+ }
+ 
+ function cargaObservaciones(){
+--- backups\procesos_20261005_revision\plugins\js\jquery.procesopausaV1.0.3.js
++++ src\plugins\js\jquery.procesopausaV1.0.3.js
+@@ -1,12 +1,16 @@
+-async function iniciarpausaTareaActual() {
++function iniciarpausaTareaActual() { return transicionArmado(iniciarPausaArmado); }
++async function iniciarPausaArmado() {
+     if (estado.pausaActiva) return;
+     if (!estado.detalleActualId || !estado.tareaEnCurso || !estado.procesoId) {
+         mostrarMensaje("Debe tener una tarea activa para iniciar una pausa.", "#BD1A00", 9000, 'mensaje');
+         return;
+     }
++    estado.tiempoTareaMs = tiempoTareaActualMs();
++    estado.inicioTareaTs = 0;
+     estado.pausaActiva = true;
+-
+-    estado.tiempoTareaMs = estado.inicioTareaTs ? ((estado.tiempoTareaMs || 0) + Date.now() - estado.inicioTareaTs) : (estado.tiempoTareaMs || 0);
++    estado.pausaTipo = 0;
++    estado.ultimoEventoId = 0;
++    estado.seleccionPausaTs = Date.now();
+     detenerTimer($("#timerT"));
+ 
+     mostrartiposPausas();
+@@ -31,7 +35,10 @@
+ 		</div>
+ 	`);
+ 
+-	$modal.modal({ 
++	$modal.off('hidden.bs.modal.armadoPausa').on('hidden.bs.modal.armadoPausa', () => {
++        if (estado.pausaActiva && !estado.ultimoEventoId && !estado.transicionActiva) finpausaTareaActual();
++    });
++    $modal.modal({ 
+         backdrop: 'static',   // evita cerrar clic fuera
+ 		keyboard: true
+ 	}).modal('show');
+@@ -149,22 +156,11 @@
+ 	if ($('#modal').hasClass('show') && $('#pausasTable').is(':visible')) {
+ 		//console.log("[MODAL ABIERTO] Buscando coincidencia en tabla...");
+ 
+-		// Intentamos encontrar coincidencia exacta y flexible
+-		const $fila = $('#pausasTable tbody tr').filter(function () {
+-			const textoCelda = $(this).find('td:eq(0)').text().trim().toUpperCase();
+-			// Coincidencia exacta o parcial (por si el lector agrega/quita algo)
+-			return textoCelda === code || textoCelda.includes(code) || code.includes(textoCelda);
+-		});
+-
+-		if ($fila.length > 0) {
+-			const codigoSeleccionado  = $fila.find('td:eq(0)').text().trim();
+-            const nombreSeleccionado  = $fila.find('td:eq(1)').text().trim();
+-			$('#modal').modal('hide');
+-			// Damos tiempo para que el modal se cierre completamente
+-			setTimeout(() => {
+-				seleccionarPausa(codigoSeleccionado, nombreSeleccionado);
+-			}, 400);
+-			return; // ← Terminamos aquí, no procesamos más reglas
++        const rows = $('#pausasTable').DataTable().rows().data().toArray();
++        const seleccion = rows.find(p => String(p.codigo).trim().toUpperCase() === code || String(p.id) === code);
++        if (seleccion) {
++            seleccionarPausa(seleccion.codigo, seleccion.descripcion);
++            return;
+ 		} else {
+ 			mostrarMensaje("Código no encontrado en la lista actual", "#BD1A00", 9000);
+ 			// Opcional: mostrar advertencia solo una vez cada cierto tiempo
+@@ -175,15 +171,16 @@
+ }
+ 
+ /** Funcion que una vez seleccionada el tipo de pausa actualiza datos en la base de datos */
+-async function seleccionarPausa(codigoPausa, nombrePausa) {
+-	if (!codigoPausa) {
++function seleccionarPausa(codigoPausa,nombrePausa) { return transicionArmado(() => seleccionarPausaInterna(codigoPausa,nombrePausa)); }
++async function seleccionarPausaInterna(codigoPausa, nombrePausa) {
++	if (!codigoPausa || !estado.pausaActiva || estado.ultimoEventoId) {
+ 		mostrarMensaje("NO ha escaneado ningun codigo.", "#BD1A00", 15000);
+ 		return;
+ 	}
+ 
+ 	try {
+         estado.inicioPausaTs = Date.now();
+-        iniciarTimer(estado.inicioPausaTs, $("#timerP"), 0);
++
+         estado.pausaTipo = codigoPausa;
+ 
+         const datosEvento = {
+@@ -202,8 +199,10 @@
+             throw new Error('No se pudo registrar el evento de pausa');
+         }
+         
++        iniciarTimer(estado.inicioPausaTs, $("#timerP"), 0);
++        $('#modal').modal('hide');
+         //Coloco a la Tipologia estado: pausa
+-        const band = await $.post(URL_API.detalles, {accion: "status", id: estado.detalleActualId, estado: 1});
++        const band = await $.post(URL_API.detalles, {accion: "status", id: estado.detalleActualId, estado: 1}).catch(() => 1);
+         if (band !== 0) {
+             logger("ERROR", "PROCESO(PAUSA)", "No se pudo marcar la tipología como pausada, detalleId=" + estado.detalleActualId);
+         }
+@@ -225,40 +224,42 @@
+         setTimeout(() => $("#label_pausa_descripcion").css("transform", "scale(1)"), 250);
+         sendMail('Pausa activada por el usuario:' + estado.operadorId + 'Fecha/Hora:' + new Date().toISOString());
+ 	}catch(e) {
+-        detenerTimer($("#timerP"));
+-        estado.pausaActiva = false;
+-        estado.pausaTipo = 0;
++        if (!estado.ultimoEventoId) detenerTimer($("#timerP"));
++        // El evento no fue confirmado: conservar selección y tiempo para reintentar o cancelar.
++        if (!estado.ultimoEventoId) { estado.inicioPausaTs = 0; estado.pausaTipo = 0; }
+         logger("ERROR", "PROCESO(PAUSA)", "linea 219, " + e);
+ 		mostrarMensaje("Error!!! Al activar la pausa", "#8C1701", 9000);
+ 	}
+ }   
+ 
+-async function finpausaTareaActual() {
++function finpausaTareaActual() { return transicionArmado(finalizarPausaArmado); }
++async function finalizarPausaArmado() {
+     if (!estado.pausaActiva) return;
+-
+-
+-    const duracionPausaMs = Date.now() - estado.inicioPausaTs;
+-
+-    detenerTimer($("#timerP"));
+-
+-    const band = await $.post(URL_API.evento, {accion: "update", evento: estado.ultimoEventoId, tiempo: duracionPausaMs, operador: estado.operadorId});
+-    if(band===0){
+-        await $.post(URL_API.detalles, {accion: "status", id:estado.detalleActualId, estado:0});
+-
+-        estado.tiempoPausaTotalMs += duracionPausaMs;
+-        estado.pausaActiva  = false;
+-        estado.tiempoPausaMs = 0;
+-
+-        estado.inicioTareaTs = Date.now();
+-        iniciarTimer(Date.now(), $("#timerT"), estado.tiempoTareaMs);
+-
+-        $("#timerP").text("00:00:00.00");
+-        logger("INFO", "PROCESO(PAUSA)", "linea 228, Fin Pausa: " + estado.ultimoEventoId + " " + duracionPausaMs);
+-        mostrarMensaje("Pausa finalizada → continuando proceso", "#32A123", 15000);
+-    } else {
+-        logger("ERROR", "PROCESO(PAUSA)", "Fallo al actualizar evento de pausa id=" + estado.ultimoEventoId);
+-        mostrarMensaje("Error al finalizar la pausa. Intente nuevamente.", "#BD1A00", 15000);
+-        // No reseteamos pausaActiva ni tocamos timers: si el backend falló, el operario
+-        // puede reintentar sin que el cliente y el servidor queden desincronizados.
++    try {
++        if (estado.ultimoEventoId) {
++            const duracionPausaMs = Math.max(0, Date.now() - estado.inicioPausaTs);
++            const band = await $.post(URL_API.evento, {accion:'update',evento:estado.ultimoEventoId,tiempo:duracionPausaMs,operador:estado.operadorId});
++            if (band !== 0) throw new Error('No se confirmó el cierre de pausa');
++            estado.tiempoPausaTotalMs += duracionPausaMs;
++            await $.post(URL_API.detalles,{accion:'status',id:estado.detalleActualId,estado:0}).catch(e=>logger('ERROR','PAUSA',e));
++        } else {
++            // Cancelar la selección no es una pausa registrada: conservar ese tramo de trabajo.
++            estado.tiempoTareaMs += Math.max(0,Date.now()-estado.seleccionPausaTs);
++        }
++        detenerTimer($('#timerP'));
++        estado.pausaActiva=false;
++        estado.pausaTipo=0;
++        estado.ultimoEventoId=0;
++        estado.inicioPausaTs=0;
++        estado.tiempoPausaMs=0;
++        estado.inicioTareaTs=Date.now();
++        iniciarTimer(estado.inicioTareaTs,$('#timerT'),estado.tiempoTareaMs);
++        $('#timerP').text('00:00:00.00');
++        $('#label_pausa_descripcion').text('');
++        $('#modal').modal('hide');
++        mostrarMensaje('Pausa finalizada → continuando proceso','#32A123',15000,'mensaje');
++    } catch(e) {
++        mostrarMensaje('No se pudo finalizar la pausa. Sigue activa; intente nuevamente.','#BD1A00',15000,'mensaje');
++        logger('ERROR','PAUSA',e.message || e);
+     }
+ }
+--- backups\procesos_20261005_revision\plugins\js\jquery.procesosuspenderV1.0.3.js
++++ src\plugins\js\jquery.procesosuspenderV1.0.3.js
+@@ -1,122 +1,23 @@
+-/** Funcion para suspender una tarea */
+-async function suspendeTipologiaActual() {
++function suspendeTipologiaActual() { return transicionArmado(suspenderTipologiaArmado); }
++async function suspenderTipologiaArmado() {
++    if (!estado.tareaEnCurso || !estado.procesoId || estado.pausaActiva) {
++        mostrarMensaje('Debe tener una tarea activa sin pausa para suspender.','#BD1A00',12000,'mensaje');
++        return;
++    }
++    const datos={ordenId:estado.ordenId,detalleId:estado.detalleActualId,procesoId:estado.procesoId,
++        sesionId:estado.sesionId,operadorId:estado.operadorId,tareaActualId:estado.tareaActualId,
++        tiempoOrdenMs:estado.inicioOrdenTs ? Date.now()-estado.inicioOrdenTs : (estado.tiempoOrdenMs||0),
++        tiempoTareaMs:tiempoTareaActualMs(),tiempoTareaTotalMs:estado.tiempoTareaTotalMs||0,
++        tiempoOperadorMs:estado.tiempoOperario||0,menu:getMenuActual()};
+     try {
+-      if (estado.pausaActiva) {
+-          mostrarMensaje("Debe finalizar la pausa antes de suspender la tipología.", "#BD1A00", 12000, 'mensaje');
+-          return;
+-      }
+-      // Pausar todo
+-      // FIX: pausarCronometro() no existía en ningún archivo del proyecto — cualquier
+-      // intento de suspender tiraba ReferenceError acá mismo, antes de hacer nada.
+-      // Se reemplaza por detenerTimer(), que es la función real usada en todo el
+-      // resto del sistema (guarda el id del interval con .data() sobre el DOM).
+-      detenerTimer($("#timerT"));
+-      detenerTimer($("#timerP"));
+-
+-      // 1) Cargar detalle y validar
+-      const detalle = await $.post(URL_API.detalles, { accion: "selectId", id: estado.detalleActualId });
+-      if (!detalle || !Array.isArray(detalle) || !detalle[0]) {
+-          mostrarMensaje("No se pudo cargar la tipología para suspender.", "#BD1A00", 30000);
+-          return;
+-      }
+-
+-      // FIX: se calculan los tiempos reales transcurridos hasta este instante.
+-      // estado.tiempoTareaMs/tiempoOrdenMs no se actualizan solos (el setInterval de
+-      // iniciarTimer solo pinta el DOM), así que si se suspende con la tarea
+-      // corriendo, había que recalcularlos a partir del timestamp real de inicio.
+-      const tiempoTareaActual = estado.inicioTareaTs ? ((estado.tiempoTareaMs || 0) + Date.now() - estado.inicioTareaTs) : (estado.tiempoTareaMs || 0);
+-      const tiempoOrdenActual = estado.inicioOrdenTs ? (Date.now() - estado.inicioOrdenTs) : (estado.tiempoOrdenMs || 0);
+-
+-      const datosEvento = {
+-          descripcion:  "suspension",
+-          procesoId:    estado.procesoId || null,
+-          tipo:         "suspension",
+-          codigo_id:    4,
+-          codigo_sub:   1,
+-          tiempo:       0,
+-          operadorId:     estado.operadorId
+-      }
+-
+-      // FIX: faltaban ordenId, detalleId, procesoId y sesionId. Sin ordenId/detalleId,
+-      // pendientes.php los guardaba como 0 y esta tipología suspendida quedaba
+-      // imposible de encontrar más adelante (iniciarOrden/seleccionarTipologia
+-      // filtran justamente por esos campos). Sin procesoId se perdía la referencia
+-      // a qué tarea puntual estaba en curso al momento de suspender.
+-      const datosCierre = {
+-          ordenId:            estado.ordenId,
+-          detalleId:          estado.detalleActualId,
+-          procesoId:          estado.procesoId || 0,
+-          sesionId:           estado.sesionId,
+-          operadorId:         estado.operadorId,
+-          eventoId:           0,
+-          tareaActualId:      estado.tareaActualId || null,
+-          tiempoOrdenMs:      tiempoOrdenActual,
+-          tiempoTareaMs:      tiempoTareaActual,
+-          tiempoTareaTotalMs: estado.tiempoTareaTotalMs || 0,
+-          tiempoOperadorMs:   estado.tiempoOperario || 0,
+-          // FIX: estado.menu nunca se seteaba en ningún lado del sistema,
+-          // por lo que este campo siempre viajaba como null. Se usa la
+-          // misma fuente de verdad que el resto del sistema (localStorage).
+-          menu:               getMenuActual()
+-      };
+-      
+-      // 2) Crear pendiente primero (evita dejar detalles en estado 2 si falla)
+-      const respuesta = await $.post(URL_API.pendiente, {accion: "add", 'datos': JSON.stringify(datosCierre)});
+-      estado.pendienteId = respuesta && respuesta[0] ? Number(respuesta[0].valor) : 0;
+-      if (estado.pendienteId === 0 ) {
+-          mostrarMensaje(`La Tipologia ${detalle[0].tipologia} NO FUE SUSPENDIDA. Avise a Jefe de Operador.`, "#8C1701", 20000);
+-          return;
+-      }
+-  
+-      // 3) Recién ahora marcar detalles como suspendida
+-      const bandDetalle = await $.post(URL_API.detalles, {accion: "status", id: estado.detalleActualId, estado: 2 });
+-      if (bandDetalle !== 0) {
+-          mostrarMensaje("Ocurrió un error al marcar la tipología como suspendida.", "#BD1A00", 30000);
+-          // No hacemos return: ya existe pendiente y evento se intentará como historial.
+-      }
+-  
+-      // 4) UI reset mínimo
+-      $("#timerT").html(`00:00:00:00`);
+-      $("#topologia").html(``);
+-      $("#label_tpo_ideal").html(``);
+-  
+-      // 5) Evento
+-      // FIX: antes este $.post no se esperaba (sin await), y la validación de
+-      // abajo terminaba comprobando un estado.ultimoEventoId "viejo" porque el
+-      // POST todavía no había vuelto. Se agrega await para eliminar esa
+-      // condición de carrera.
+-      const respuestaEvento = await $.post(URL_API.evento, {'accion': "add", 'datos' : JSON.stringify(datosEvento)});
+-      estado.ultimoEventoId = (respuestaEvento && respuestaEvento[0]) ? respuestaEvento[0].id : 0;
+-  
+-      if (estado.ultimoEventoId === 0) {
+-          mostrarMensaje(`La Tipologia ${detalle[0].tipologia} es SUSPENDIDA pero falló el registro de evento.`, "#8C1701", 30000);
+-          return;
+-      }
+-      mostrarMensaje(`La Tipologia ${detalle[0].tipologia} es SUSPENDIDA.`, "#8C1701", 30000);
+-      
+-      // 6) Reset interno para evitar estados raros
+-      // FIX: antes solo se reseteaban tareaActualId/tareaActualNro/pausaActiva.
+-      // Faltaba resetear detalleActualId, procesoId, tareaEnCurso y los tiempos de
+-      // tarea, lo que dejaba "colgado" el estado de la tipología suspendida y hacía
+-      // que la siguiente tarea heredara tiempoTareaMs viejo, o que el sistema
+-      // creyera que seguía habiendo una "tarea en curso" que ya no existe.
+-      estado.detalleActualId    = 0;
+-      estado.tareaActualId      = 0;
+-      estado.tareaActualNro     = 0;
+-      estado.tareaEnCurso       = false;
+-      estado.procesoId          = 0; // ya quedó guardado dentro del pendiente
+-      estado.tiempoTareaMs      = 0;
+-      estado.tiempoTareaTotalMs = 0;
+-      estado.pausaActiva        = false;
+-      estado.suspensionActiva   = false; // ver nota más abajo sobre su uso
+-      estado.operadorIdAux      = 0;
+-
+-
+-      sendMail('Suspension de la actividad por el usuario:' + estado.operadorId + 'Fecha/Hora:' + new Date().toISOString());
+-
+-  
+-    } catch (e) {
+-      logger("ERROR", "PROCESO(SUSPENDER)", "suspendeTipologiaActual: " + e);
+-      mostrarMensaje("Error inesperado al intentar suspender la tipología.", "#8C1701", 20000);
++        const r=await $.post(URL_API.proceso,{accion:'suspender',datos:JSON.stringify(datos)},null,'json');
++        if (r?.status !== 'ok' || !Number(r.pendienteId)) throw new Error('Suspensión no confirmada');
++        limpiarTareaArmado();
++        Object.assign(estado,{detalleActualId:0,tareaActualNro:0,tiempoTareaTotalMs:0,operadorIdAux:0});
++        $('#topologia,#label_tpo_ideal,#label_operario_aux').text('');
++        mostrarMensaje('Tipología suspendida. El tiempo y la tarea quedaron guardados.','#32A123',15000,'mensaje');
++    } catch(e) {
++        mostrarMensaje('No se pudo suspender. La tarea sigue activa; vuelva a intentarlo.','#BD1A00',15000,'mensaje');
++        logger('ERROR','SUSPENDER',e.message || e);
+     }
+ }
+--- backups\procesos_20261005_revision\plugins\js\jquery.corte_pdf.js
++++ src\plugins\js\jquery.corte_pdf.js
+@@ -4,13 +4,21 @@
+     let task = null, order = null, busy = false, confirmedAt = 0, operatorToken = '', ready = false;
+     let chain = Promise.resolve();
+     let completing = false;
+-    const api = async (accion, extra={}) => {
++    // Heartbeat e ítems deben confirmar en el mismo orden: una respuesta vieja
++    // nunca puede reactivar un PDF que acaba de finalizar con el último tilde.
++    let mutationQueue = Promise.resolve();
++    function withMutation(fn) {
++        const next = mutationQueue.then(fn);
++        mutationQueue = next.catch(() => {});
++        return next;
++    }
++    const api = (accion, extra={}) => withMutation(async () => {
+         try {
+             const r=await $.post('api/corte_pdf.php',{accion,...extra},null,'json');
+             if(!r?.ok)throw new Error(r?.error||'Respuesta inválida del servidor.');
+             return r;
+         }catch(e){throw new Error(e.responseJSON?.error||e.message||'No se pudo conectar. El trabajo sigue pendiente de confirmación.');}
+-    };
++    });
+     const message = (s,error=false) => $('#mensaje').text(s).css('color',error?'#BD1A00':'#28742a');
+     function accept(t){task=t;confirmedAt=Date.now();$('#timerT').text(msToHhmmssms(Number(task?.elapsed_ms||0)));update();if(task?.estado==='finalizada')refreshPending().catch(e=>message(e.message,true));}
+     function update(){
+@@ -112,6 +120,7 @@
+     }
+     window.cortePdf={
+         accept,
++        withMutation,
+         lockCompletion:value=>{completing=value;update();},
+         canEdit:doc=>!busy&&!completing&&task?.estado==='activa'&&Number(task.documento_id)===Number(doc),
+         editContext:()=>({corte_token:task?.token||''}),
+--- backups\procesos_20261005_revision\plugins\js\jquery.corte_documentos.js
++++ src\plugins\js\jquery.corte_documentos.js
+@@ -29,7 +29,7 @@
+     if(!window.cortePdf?.canEdit(doc))return;
+     if(field==='tilde'&&Number(value)===1)for(const pending of corteDocChanges.values())enqueueCambioCorte(pending);
+     const key=doc+':'+item+':'+field;const old=corteDocChanges.get(key);if(old?.timer)clearTimeout(old.timer);
+-    const change={key,doc,item,field,value,context:window.cortePdf.editContext(),timer:null};
++    const change={key,doc,item,field,value,context:window.cortePdf.editContext(),user:_docActivo.user,timer:null};
+     change.completesPdf=field==='tilde'&&Number(value)===1&&$('#tabla-body .chk-tilde:not(:checked)').length===0;
+     if(change.completesPdf)window.cortePdf.lockCompletion(true);
+     corteDocChanges.set(key,change);
+@@ -38,16 +38,16 @@
+ function enqueueCambioCorte(change){
+     if(change.queued)return;
+     if(change.timer)clearTimeout(change.timer);change.timer=null;change.queued=true;guardadosPendientes++;
+-    const work=corteDocQueue.then(async()=>{
++    const work=corteDocQueue.then(()=>window.cortePdf.withMutation(async()=>{
+         const config=await $.post('api/system.php',{accion:'negocio'},null,'json');
+-        const datos={doc_id:change.doc,item_id:change.item,user:_docActivo.user,escala:config.escala,tamanio:config.tamanio,...change.context,[change.field]:change.value};
++        const datos={doc_id:change.doc,item_id:change.item,user:change.user,escala:config.escala,tamanio:config.tamanio,...change.context,[change.field]:change.value};
+         const r=await $.post('api/documentos.php',{accion:'update',datos},null,'json');
+         if(!r?.ok)throw new Error(r?.error||'No se pudo guardar el PDF.');
+         if(r.tarea)window.cortePdf.accept(r.tarea);
+         if(corteDocChanges.get(change.key)===change)corteDocChanges.delete(change.key);
+         if(Number(_docActivo.id)===change.doc&&r.archivo)$('#visor-pdf').attr('src','tmp/modificados/'+encodeURIComponent(r.archivo)+'?t='+Date.now());
+         $('#mensaje').text(r.tarea?.estado==='finalizada'?'PDF completo. Cronometro detenido; solo consulta.':'Tilde y PDF guardados.').css('color','green');
+-    });
++    }));
+     corteDocQueue=work.catch(e=>{change.error=e.responseJSON?.error||e.message||'Error al guardar';$('#mensaje').text('No se guardó el cambio: '+change.error+'. Reintente antes de salir.').css('color','red');}).finally(()=>{guardadosPendientes--;change.queued=false;if(change.completesPdf)window.cortePdf.lockCompletion(false);});
+     return corteDocQueue;
+ }

@@ -1,0 +1,8 @@
+[
+    "include/productividad_costos.php",
+    "scripts/migrar_productividad_costos.php",
+    "modules/soporte/productividad.php",
+    "modules/soporte/api/save_productividad.php",
+    "modules/soporte/sql/migration_productividad.sql",
+    "modules/soporte/assets/js/productividad.js"
+]

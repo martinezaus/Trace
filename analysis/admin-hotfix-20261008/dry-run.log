@@ -1,0 +1,8 @@
+TRACE release-0009 - Destino: D:\desarrollos\trace
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: admin.php
+Archivo: include/pages/admin_export.php
+Archivo: plugins/js/admin_exports.js
+Archivo: include/footer.php
+Dependencias de administracion verificadas. No hay migraciones de datos.
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]

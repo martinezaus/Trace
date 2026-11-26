@@ -1,0 +1,120 @@
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+Esquema de eventos: 0 cambios necesarios.
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]
+OK: simulacion sin cambios.
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+Esquema de eventos: 0 cambios necesarios.
+Migracion de eventos aplicada. Detalle en C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion\update-backups\release-0006_20261005_232506_381\eventos-esquema.json
+Actualizacion aplicada. Respaldo: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion\update-backups\release-0006_20261005_232506_381
+Log: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion\update-logs\release-0006_20261005_232506_381.log
+OK: aplicacion aislada, archivos y respaldos verificados.
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+Release 0006 ya aplicado y verificado. No se repite.
+OK: segunda aplicacion no se repite.
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\instalacion
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+ADVERTENCIA: Los archivos de destino difieren de la base del paquete: api/procesos.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\paquete\update.ps1 : No se 
+sobrescriben versiones diferentes. Revisar el paquete contra esa instalacion.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: no sobrescribe codigo de otra version.
+Pruebas del instalador completadas con Docker simulado: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\fallo-migracion
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+Esquema de eventos: 0 cambios necesarios.
+ADVERTENCIA: Los archivos nuevos se conservan. Verifique el registro en BD antes de reintentar: la confirmacion puede 
+haberse perdido.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\paquete\update.ps1 : Docker 
+fallo (1): Fallo simulado de migracion
+ 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\fallo-migracion
+Archivo: api/procesos.php
+Archivo: api/sesiones.php
+Archivo: include/footer.php
+Archivo: include/proceso_service.php
+Archivo: scripts/migrar_eventos_descartados.php
+Archivo: plugins/js/jquery.procesoV1.0.3.js
+Archivo: plugins/js/jquery.procesopausaV1.0.3.js
+Archivo: plugins/js/jquery.procesosuspenderV1.0.3.js
+Archivo: plugins/js/jquery.corte_pdf.js
+Archivo: plugins/js/jquery.corte_documentos.js
+Archivo: include/procesos_fecha.php
+Archivo: include/corte_pdf_service.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\paquete\update.ps1 : 
+Actualizacion interrumpida o en curso. Revisar soporte y respaldo: 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: fallo de migracion conserva respaldo/codigo y bloquea reintento incierto.
+TRACE release-0006 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\fallo-migracion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0006-test-8bba34fb7f8b422ea83793a7c9ae4f71\paquete\update.ps1 : 
+Payload alterado: api/procesos.php
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: paquete alterado rechazado.

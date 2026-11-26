@@ -1,0 +1,8 @@
+{
+    "name": "empresa/configuraciones",
+    "description": "Sistema de administracion de parametros (systemnegocio, systemsmtp, systemusage)",
+    "require": {
+        "php": ">=7.4",
+        "gabordemooij/redbean": "^5.7"
+    }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "path": "proceso_corte.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/proceso_corte.php\n"
+  },
+  {
+    "path": "api/corte_pdf.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/corte_pdf.php\n"
+  },
+  {
+    "path": "api/documentos.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/api/documentos.php\n"
+  },
+  {
+    "path": "include/corte_pdf_service.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/corte_pdf_service.php\n"
+  },
+  {
+    "path": "include/corte_auth.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/corte_auth.php\n"
+  },
+  {
+    "path": "include/footer.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/footer.php\n"
+  },
+  {
+    "path": "include/orden_delete_service.php",
+    "code": 0,
+    "output": "No syntax errors detected in /var/www/html/include/orden_delete_service.php\n"
+  },
+  {
+    "path": "plugins/js/jquery.corte_pdf.js",
+    "code": 0,
+    "output": ""
+  },
+  {
+    "path": "migrations/002_release_registry.php",
+    "code": 0,
+    "output": "No syntax errors detected in Standard input code\n"
+  },
+  {
+    "path": "migrations/006_cortes.php",
+    "code": 0,
+    "output": "No syntax errors detected in Standard input code\n"
+  }
+]

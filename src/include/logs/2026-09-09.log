@@ -1,0 +1,45 @@
+[2026-09-09 15:48:30] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 15:48:34] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 15:48:53] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 15:58:08] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 15:58:12] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 15:58:16] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 15:58:21] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] linea 458, [documento: 1 proceso 4]
+[2026-09-09 15:58:23] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] linea 458, [documento: 2 proceso 4]
+[2026-09-09 15:58:24] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] linea 458, [documento: 3 proceso 4]
+[2026-09-09 15:58:25] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] linea 458, [documento: 4 proceso 4]
+[2026-09-09 15:58:33] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 15:58:37] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 18:46:20] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 18:46:25] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 19:14:29] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 19:14:33] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 19:14:37] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 19:15:43] [INFO] [MOD:PROCESO] [IP:127.0.0.1] linea 878: proceso 1 finalizado, status: ok
+[2026-09-09 19:15:51] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 19:15:55] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 19:15:55] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 19:16:10] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:16:10] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:16:19] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:16:19] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:16:27] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:16:27] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:16:49] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:16:49] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:17:03] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 19:17:07] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 19:17:08] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 19:17:12] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas
+[2026-09-09 19:17:12] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 19:17:14] [INFO] [MOD:ORDENES] [IP:127.0.0.1] linea 421, Cambia el estado 1
+[2026-09-09 19:17:28] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:17:28] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:29:02] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:29:02] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:55:00] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:55:00] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 19:55:05] [WARNING] [MOD:DETALLES] [IP:127.0.0.1] Cierre rechazado para id 2: procesos completados=1, etapas=8
+[2026-09-09 19:55:05] [ERROR] [MOD:PROCESO] [IP:127.0.0.1] Fallo update detalle id=2
+[2026-09-09 20:08:25] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: Array | Asunto: Trace Alertas
+[2026-09-09 20:08:30] [INFO] [MOD:MAILER] [IP:127.0.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas

@@ -1,0 +1,42 @@
+[
+  {
+    "path": "api/procesos.php",
+    "sha256": "86cf77acd33e0a6496a33ce352b4151f274dd1c23d6e3cdc6f670c84bea063b8"
+  },
+  {
+    "path": "api/sesiones.php",
+    "sha256": "3155c2147118c9326b68a49a302f6d0bbb27aaf4298b31051c624225944ee50b"
+  },
+  {
+    "path": "include/footer.php",
+    "sha256": "23ebb1d490ad724fad723f202f4dda5950f085261e36acb253e58cf206cb4679"
+  },
+  {
+    "path": "include/proceso_service.php",
+    "sha256": "ad926944f2147a78edc97124e738ae5bd6e9ad22859823348eff2503675398a2"
+  },
+  {
+    "path": "scripts/migrar_eventos_descartados.php",
+    "sha256": "ea6bf2324ea5031db8f8b1d78484bf66c7b1017dd52e6d36100f35c25a4f21c1"
+  },
+  {
+    "path": "plugins/js/jquery.procesoV1.0.3.js",
+    "sha256": "8eec69a01dfb958b88bacaeb8494215c8e41fb3badd02c021cb1dd83dd280069"
+  },
+  {
+    "path": "plugins/js/jquery.procesopausaV1.0.3.js",
+    "sha256": "5d2c5a2f168ea818a826a3f94ffbebd57056237eedd9129a2e09744801b3ee75"
+  },
+  {
+    "path": "plugins/js/jquery.procesosuspenderV1.0.3.js",
+    "sha256": "c15fc8a34edebf3ea067fadb67f20284f52ef2d88b33f11240ba546cf3c02951"
+  },
+  {
+    "path": "plugins/js/jquery.corte_pdf.js",
+    "sha256": "180a638a7a80fe253489f0a972cd9773bbb597e0c85746941eba172a82db6878"
+  },
+  {
+    "path": "plugins/js/jquery.corte_documentos.js",
+    "sha256": "1e364ccc1a2480c173885b89213582cdd20e8885c2833e9a25e4985925a2cb31"
+  }
+]

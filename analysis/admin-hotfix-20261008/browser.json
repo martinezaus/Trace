@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "admin sin avisos con output_buffering=0",
+    "ordenes sin avisos con output_buffering=0",
+    "ordenes PDF válido; Copiar ausente",
+    "ordenes imprime sólo con logo cargado",
+    "operarios sin avisos con output_buffering=0",
+    "operarios PDF válido; Copiar ausente",
+    "operarios imprime sólo con logo cargado",
+    "estadisticas sin avisos con output_buffering=0",
+    "reportes sin avisos con output_buffering=0"
+  ],
+  "errors": []
+}

@@ -1,0 +1,16 @@
+{
+  "project": "trace-release0011-qa-e0f51917",
+  "checks": [
+    "rechazo sin 0010",
+    "simulaci\u00f3n sin DDL ni cambios de c\u00f3digo",
+    "respaldo de c\u00f3digo y BD",
+    "aplicaci\u00f3n real sobre base 0010",
+    "21 archivos verificados",
+    "datos de negocio ficticios conservados",
+    "configuraci\u00f3n creada sin tarifas",
+    "registro 0011 aplicado",
+    "reaplicaci\u00f3n idempotente"
+  ],
+  "business_sha256_before": "0153e5734fc10ccd9abaa1e5585ca40906704646250d62b3e37900199e221524",
+  "business_sha256_after": "0153e5734fc10ccd9abaa1e5585ca40906704646250d62b3e37900199e221524"
+}

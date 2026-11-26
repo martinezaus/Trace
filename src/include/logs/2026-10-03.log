@@ -1,0 +1,3 @@
+[2026-10-03 08:54:37] [INFO] [MOD:Login] [IP:172.18.0.1] linea 109, [O1953] Seleccionó sector: Armado.
+[2026-10-03 08:54:37] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo solicitado. Parámetros: {"host":"smtp.gmail.com","puerto":"587","cifrado":"tls","user":"martinez.aus@gmail.com","pass":"migc mkoq rszu cect","destinos":"jpmartinez@mendoza.gov.ar"} | Asunto: Trace Alertas
+[2026-10-03 08:54:42] [INFO] [MOD:MAILER] [IP:172.18.0.1] Correo enviado a: jpmartinez@mendoza.gov.ar | Asunto: Trace Alertas

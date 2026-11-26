@@ -1,0 +1,216 @@
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+Dependencias de administracion verificadas. No hay migraciones de datos.
+Simulacion terminada. Para aplicar explicitamente: trace.bat --apply ["ruta de la copia"]
+OK: simulacion sin cambios.
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+Dependencias de administracion verificadas. No hay migraciones de datos.
+Validacion de eliminacion completada. Detalle en C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion\update-backups\release-0008_20261007_140207_388\eliminacion-validacion.json
+Actualizacion aplicada. Respaldo: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion\update-backups\release-0008_20261007_140207_388
+Log: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion\update-logs\release-0008_20261007_140207_388.log
+OK: aplicacion aislada, archivos y respaldos verificados.
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+Release 0008-r2 ya aplicado y verificado. No se repite.
+OK: segunda aplicacion no se repite.
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\instalacion
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+ADVERTENCIA: Los archivos de destino difieren de la base del paquete: api/ordenes.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\paquete\update.ps1 : No se 
+sobrescriben versiones diferentes. Revisar el paquete contra esa instalacion.
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: no sobrescribe codigo de otra version.
+Pruebas del instalador completadas con Docker simulado: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\fallo-migracion
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+Dependencias de administracion verificadas. No hay migraciones de datos.
+ADVERTENCIA: Los archivos nuevos se conservan. Verifique el registro en BD antes de reintentar: la confirmacion puede 
+haberse perdido.
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\paquete\update.ps1 : Docker 
+fallo (1): Fallo simulado de migracion
+ 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\fallo-migracion
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+Archivo: api/ordenes.php
+Archivo: css/footer.css
+Archivo: include/detalle_admin_service.php
+Archivo: include/footer.php
+Archivo: include/functions.php
+Archivo: include/header.php
+Archivo: include/operadores_admin.php
+Archivo: include/parse_pdf.php
+Archivo: include/reportes_service.php
+Archivo: plugins/datatables/datatables.css
+Archivo: plugins/datatables/datatables.min.css
+Archivo: plugins/js/admin_exports.js
+Archivo: plugins/js/es-ES.json
+Archivo: plugins/js/jquery.grafico.js
+Archivo: plugins/js/jquery.operarios.js
+Archivo: plugins/js/jquery.ordenes.js
+Archivo: include/pages/admin_export.php
+Archivo: include/pages/fileV1.0.1.php
+Archivo: include/pages/operadorAdd.php
+Archivo: include/pages/operadorEdit.php
+Archivo: include/pages/upload.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\paquete\update.ps1 : 
+Actualizacion interrumpida o en curso. Revisar soporte y respaldo: 
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: fallo de migracion conserva respaldo/codigo y bloquea reintento incierto.
+TRACE release-0008 revision 2 - Destino: C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\fallo-migracion
+SIMULACION: no se copian archivos, no se crean respaldos ni se modifica la BD.
+Archivo: admin.php
+Archivo: estadisticas.php
+Archivo: operarios.php
+Archivo: api/detalles.php
+Archivo: api/estadisticas.php
+Archivo: api/operadores.php
+C:\Users\Pablo\AppData\Local\Temp\trace-release-0008-test-8795ced4d017422ab553de618554dbce\paquete\update.ps1 : 
+Payload alterado: api/ordenes.php
+    + CategoryInfo          : NotSpecified: (:) [Write-Error], WriteErrorException
+    + FullyQualifiedErrorId : Microsoft.PowerShell.Commands.WriteErrorException,update.ps1
+ 
+OK: paquete alterado rechazado.

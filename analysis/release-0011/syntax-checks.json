@@ -1,0 +1,23 @@
+{
+  "ok": true,
+  "files": [
+    "api/detalles.php",
+    "api/procesos.php",
+    "api/reportes.php",
+    "include/detalle_admin_service.php",
+    "include/footer.php",
+    "include/productividad.php",
+    "include/productividad_costos.php",
+    "include/reportes_export.php",
+    "include/reportes_service.php",
+    "scripts/migrar_productividad_costos.php",
+    "plugins/js/jquery.reportes.js",
+    "modules/soporte/dashboard.php",
+    "modules/soporte/productividad.php",
+    "modules/soporte/api/save_productividad.php",
+    "modules/soporte/partials/header.php",
+    "modules/soporte/assets/js/productividad.js",
+    "include/pages/ordenesView.php",
+    "include/pages/procesosView.php"
+  ]
+}
